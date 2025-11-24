@@ -1,0 +1,34 @@
+<div class="universal-form-wrapper">
+  <div class="app-form">
+    <form [formGroup]="reactiveform" (ngSubmit)="submit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <i class="bi bi-pencil-square"></i>
+        <h3>تحديث الكمية</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="Quantity">الكمية</label>
+        <input 
+          id="Quantity" 
+          type="number" 
+          class="form-control" 
+          placeholder="أدخل الكمية" 
+          formControlName="Quantity"
+        />
+        <div *ngIf="Quantity?.touched && Quantity?.invalid" class="error">
+          <small *ngIf="Quantity?.errors?.['required']">الكمية مطلوبة.</small>
+          <small *ngIf="Quantity?.errors?.['pattern']">صيغة الكمية غير صحيحة.</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">تحديث</button>
+
+    </form>
+  </div>
+</div>

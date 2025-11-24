@@ -1,0 +1,82 @@
+.menu-card {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    border: none;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card .list-group-item {
+    background-color: #fff;
+    border: none;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+.menu-card .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.menu-card button {
+    background: linear-gradient(90deg, #4b6cb7, #182848);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.menu-card button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+.empty-cart {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fdfdfd;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  max-width: 450px;
+  margin-top:15%;
+  margin-right:35%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+.empty-cart:hover {
+  transform: translateY(-5px);
+}
+.empty-cart h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.empty-cart button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.empty-cart button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+

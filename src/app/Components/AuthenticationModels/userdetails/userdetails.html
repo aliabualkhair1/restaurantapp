@@ -1,0 +1,71 @@
+<div class="top-buttons-container d-grid gap-3 mb-4">
+  <button *ngIf="userdetails.length>0" (click)="updateaccount()" class="btn btn-primary top-btn">
+    <i class="bi bi-arrow-clockwise"></i> تحديث الحساب
+  </button>
+  <button *ngIf="userdetails.length>0" (click)="resetpassword()" class="btn btn-success top-btn">
+    <i class="bi bi-x-octagon"></i> إعادة تعيين كلمة المرور
+  </button>
+  <button *ngIf="userdetails.length>0" (click)="deleteaccount()" class="btn btn-danger top-btn">
+    <i class="bi bi-x-octagon"></i> حذف الحساب
+  </button>
+</div>
+
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="container-fluid py-4" *ngIf="!loading">
+  <div class="user-details-wrapper" *ngFor="let _userdetails of userdetails">
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+      <div class="card-header bg-gradient text-white py-3 px-4">
+        <h3 class="mb-0">
+          تفاصيل المستخدم
+        </h3>
+      </div>
+
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">معرّف المستخدم</label>
+            <div class="data-box">{{ _userdetails.userId }}</div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">اسم المستخدم</label>
+            <div class="data-box">{{ _userdetails.userName || 'لا يوجد اسم مستخدم.' }}</div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">البريد الإلكتروني</label>
+            <div class="data-box">{{ _userdetails.email }}</div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">الاسم الأول</label>
+            <div class="data-box">{{ _userdetails.firstName }}</div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">اسم العائلة</label>
+            <div class="data-box">{{ _userdetails.lastName }}</div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <label class="text-muted small mb-1">رقم الهاتف</label>
+            <div class="data-box">{{ _userdetails.phoneNumber }}</div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <label class="text-muted small mb-1">الرقم القومي</label>
+            <div class="data-box">{{ _userdetails.nationalId || 'لا يوجد رقم قومي.' }}</div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <label class="text-muted small mb-1">الدور</label>
+            <div class="data-box role">{{ _userdetails.roles }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

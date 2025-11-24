@@ -1,0 +1,45 @@
+<div class="login-dark">
+  <form [formGroup]="formgroup" (ngSubmit)="submit()">
+    <div class="illustration">
+      <i class="icon ion-ios-locked-outline"></i>
+    </div>
+    <div *ngIf="apiMessage" 
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input class="form-control" type="email" placeholder="البريد الإلكتروني" formControlName="Email">
+      <div *ngIf="Email?.touched && Email?.invalid" class="error">
+        <small *ngIf="Email?.errors?.['email']">صيغة البريد الإلكتروني غير صحيحة.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>رقم الهاتف</label>
+      <input class="form-control" type="text" placeholder="رقم الهاتف" formControlName="Phonenumber">
+      <div *ngIf="PhoneNumber?.touched && PhoneNumber?.invalid" class="error">
+        <small *ngIf="PhoneNumber?.errors?.['pattern']">صيغة رقم الهاتف غير صحيحة. يجب أن يبدأ بـ 010 أو 011 أو 012 أو 015 ويكون 11 رقم.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>الاسم الأول</label>
+      <input class="form-control" placeholder="الاسم الأول" formControlName="Firstname">
+      <div *ngIf="FirstName?.touched && FirstName?.invalid" class="error">
+        <small *ngIf="FirstName?.errors?.['pattern']">الاسم الأول يحتوي على أحرف غير صالحة.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>اسم العائلة</label>
+      <input class="form-control" placeholder="اسم العائلة" formControlName="Lastname">
+      <div *ngIf="LastName?.touched && LastName?.invalid" class="error">
+        <small *ngIf="LastName?.errors?.['pattern']">اسم العائلة يحتوي على أحرف غير صالحة.</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="formgroup.invalid">تحديث</button>
+  </form>
+</div>

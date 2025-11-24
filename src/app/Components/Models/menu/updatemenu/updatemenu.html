@@ -1,0 +1,68 @@
+<div class="universal-form-wrapper">
+  <div class="app-form">
+    <form [formGroup]="reactiveform" (ngSubmit)="submit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <i class="bi bi-chat-dots"></i>
+        <h3>تعديل القائمة</h3>
+      </div>
+      <div class="form-group">
+    <label for="item" class="form-label fw-bold">الفئة</label>
+    <select id="item" class="form-select" (click)="getcategoryid($event)">
+      <option value="--" selected disabled>-حدد الفئة -</option>
+      <option *ngFor="let cat of category" [value]="cat.id">{{ cat.name }}</option>
+    </select>
+  </div>
+
+      <div class="form-group">
+        <label for="MenuName">اسم القائمة</label>
+        <input 
+          id="MenuName" 
+          type="text" 
+          class="form-control" 
+          placeholder="أدخل اسم القائمة" 
+          formControlName="MenuName"
+        />
+        <div *ngIf="MenuName?.touched && MenuName?.invalid" class="error">
+          <small *ngIf="MenuName?.errors?.['pattern']">يسمح فقط بالحروف الإنجليزية.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="menuDesc">وصف القائمة</label>
+        <input 
+          id="menuDesc" 
+          type="text" 
+          class="form-control" 
+          placeholder="أدخل الوصف" 
+          formControlName="Description"
+        />
+        <div *ngIf="Description?.touched && Description?.invalid" class="error">
+          <small *ngIf="Description?.errors?.['pattern']">غير مسموح بالرموز</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <input
+            id="menuStatus"
+            type="checkbox"
+            class="form-check-input"
+            formControlName="IsAvailable"
+          />
+          <label class="form-check-label" for="menuStatus">
+            توافر القائمة
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">تحديث القائمة</button>
+
+    </form>
+  </div>
+</div>

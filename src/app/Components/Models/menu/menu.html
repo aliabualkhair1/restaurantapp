@@ -1,0 +1,98 @@
+<div *ngIf="apiMessage" 
+[ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+style="margin: 0 auto 20px; text-align: center;">
+{{ apiMessage }}
+</div>
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && menu.length>0">
+   <button (click)="addmenu()" class="btn btn-primary top-btn">
+    <i class="bi bi-x-octagon"></i> إضافة مينيو
+  </button>
+  <button (click)="restoremenu()" class="btn btn-success top-btn">
+    <i class="bi bi-arrow-clockwise"></i> استعادة مينيو محذوف
+  </button>
+</div>
+<div class="top-buttons-container d-grid gap-3 mb-4"*ngIf="(isAdmin || isAdminAssistant)">
+  <button (click)="unavailablemenu()" class="btn btn-warning top-btn" >
+    <i class="bi bi-x-octagon"></i>  مينيو غير متاح 
+  </button>
+</div>
+
+<div class="row mb-4 align-items-end" *ngIf="menu.length>0">
+  <div class="col-md-4 mb-3">
+    <label for="item" class="form-label fw-bold">الفئات</label>
+    <select id="item" class="form-select" (change)="getmenubycategory($event)">
+      <option value="all" selected>الكل</option>
+      <option *ngFor="let cat of category" [value]="cat.name">{{ cat.name }}</option>
+    </select>
+  </div>
+  
+  <div class="col-md-8 mb-3" *ngIf="menu.length>0">
+    <div class="search-container">
+      <div class="search-box">
+        <input [(ngModel)]="name" placeholder="ابحث باسم القائمة..." type="text">
+        <button (click)="search(name)" class="btn btn-primary">
+          <i class="bi bi-search"></i> بحث
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading"> 
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let menus of filterd"> 
+    <div class="card h-100 shadow-sm menu-card"> 
+      <div class="card-header bg-card-header text-white d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">{{ menus.name }}</h5>
+      </div>
+
+      <div class="card-body">
+        <p class="card-text text-muted">{{ menus.description || 'لا يوجد وصف متاح.' }}</p>
+        <ul class="list-group list-group-flush border-top border-bottom my-3">
+          <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+            <strong>الفئة:</strong>
+            <span class="badge text-bg-info category-badge">{{ menus.categoryName }}</span>
+          </li>
+        </ul>
+        <div class="card-footer bg-card-footer">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong>التوافر:</strong>
+            <span 
+              class="status-pill"
+              [class.status-available]="menus.isAvailable" 
+              [class.status-unavailable]="!menus.isAvailable"
+            >
+              {{ menus.isAvailable ? 'متاح' : 'غير متاح' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 justify-content-end" *ngIf="menus.isAvailable">
+          <button (click)="getmenuitemsbymenuid(menus.id)" class="btn btn-sm btn-outline-secondary flex-grow-1">
+            <i class="bi bi-list"></i> عناصر المينيو
+          </button>
+          <button (click)="updatemenubymenuid(menus.id)" class="btn btn-sm btn-outline-primary flex-grow-1" *ngIf="isAdmin || isAdminAssistant">
+            <i class="bi bi-pencil-square"></i> تعديل
+          </button>
+          <button (click)="deletemenubymenuid(menus.id)" class="btn btn-sm btn-outline-danger flex-grow-1" *ngIf="isAdmin || isAdminAssistant">
+            <i class="bi bi-trash"></i> حذف
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="menu.length>0">
+    <button class="btn btn-outline-secondary" (click)="prevPage()" [disabled]="currentpage === 1">السابق</button>
+    <span class="fw-bold">الصفحة {{currentpage}} من {{totalpages}}</span>
+    <button class="btn btn-outline-secondary" (click)="nextPage()" [disabled]="currentpage === totalpages">التالي</button>
+  </div>
+</div>
+
+<div *ngIf="menu.length==0" class="empty-cart">
+  <h3>لا يوجد أى مينيو حتى الآن</h3>
+  <button *ngIf="isAdmin || isAdminAssistant" (click)="addmenu()">أضف الأن</button>
+</div>

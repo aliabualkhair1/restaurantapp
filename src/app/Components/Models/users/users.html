@@ -1,0 +1,52 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+<div class="loading-container" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="user-grid" *ngIf="!loading">
+  <div class="user-grid-item" *ngFor="let User of users">
+    <div class="user-card">
+      <ul class="user-details-list">
+        <li class="list-item-detail">
+          <strong>معرّف المستخدم</strong>
+          <span class="text-secondary">{{ User.userId }}</span>
+        </li>
+        <li class="list-item-detail">
+          <strong>اسم المستخدم</strong>
+          <span>{{ User.userName }}</span>
+        </li>
+        <li class="list-item-detail">
+          <strong>البريد الإلكتروني</strong>
+          <span>{{ User.email }}</span>
+        </li>
+        <li class="list-item-detail">
+          <strong>الأدوار</strong>
+          <span class="role-badge">{{ User.roles }}</span>
+        </li>
+        <li class="list-item-action">
+          <div class="role-selector-group" *ngIf="isauth">
+            <label for="item-{{ User.userId }}">الدور الجديد</label>
+            <select
+              id="item-{{ User.userId }}"
+              class="form-input"
+              (change)="updateuserrole(User.userName, $event)"
+            >
+              <option value="" disabled selected>اختر دور جديد</option>
+              <option value="{{ role }}" *ngFor="let role of roles">
+                {{ role }}
+              </option>
+            </select>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="users.length==0" class="empty-cart">
+<h3>لا يوجد مستخدمين حتى الأن</h3>
+</div>

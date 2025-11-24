@@ -1,0 +1,116 @@
+<div *ngIf="loading" class="full-screen-spinner">
+  <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!loading" class="dashboard">
+
+  <div class="row">
+    <div class="card info card-tilt animate-card-in">
+      <div class="card-header">عدد المستخدمين</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalUsers || 0 }}</h3>
+        <button (click)="getusers()">عرض</button>
+      </div>
+    </div>
+    <div class="card info card-tilt animate-card-in">
+      <div class="card-header">أسئلة العملاء</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalCustomersQuestions || 0 }}</h3>
+        <button (click)="getcustomerquestions()">عرض</button>
+      </div>
+    </div>
+    <div class="card info card-tilt animate-card-in">
+      <div class="card-header">عدد الفئات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalCategories || 0 }}</h3>
+        <button (click)="getcategories()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card info card-tilt animate-card-in">
+      <div class="card-header">الشكاوى والإقتراحات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalComplaintsAndSuggestions || 0 }}</h3>
+        <button (click)="getcomplaintsandsuggestions()">عرض</button>
+      </div>
+    </div>
+    <div class="card secondary card-tilt animate-card-in">
+      <div class="card-header">عناصر المينيو</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.menuItems || 0 }}</h3>
+        <button (click)="getmenuitems()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card secondary card-tilt animate-card-in">
+      <div class="card-header">عدد الطلبات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalOrders || 0 }}</h3>
+        <button (click)="getorders()">عرض</button>
+      </div>
+    </div>
+    <div class="card secondary card-tilt animate-card-in">
+      <div class="card-header">عدد الحجوزات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.totalReservations || 0 }}</h3>
+        <button (click)="getreservations()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card warning card-tilt animate-card-in">
+      <div class="card-header">الآراء عن الطلبات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.orderFeedbacks || 0 }}</h3>
+        <button (click)="getordersfeedback()">عرض</button>
+      </div>
+    </div>
+    <div class="card warning card-tilt animate-card-in">
+      <div class="card-header">الآراء عن الحجوزات</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.reservationFeedbacks || 0 }}</h3>
+        <button (click)="getreservationsfeedback()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card success card-tilt animate-card-in">
+      <div class="card-header">الطلبات المدفوعة</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.orderPaid || 0 }}</h3>
+        <button (click)="getorderspaid()">عرض</button>
+      </div>
+    </div>
+    <div class="card success card-tilt animate-card-in">
+      <div class="card-header">الحجوزات المدفوعة</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.reservationPaid || 0 }}</h3>
+        <button (click)="getreservationspaid()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card danger card-tilt animate-card-in">
+      <div class="card-header">الطلبات الملغية</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.orderCancelled || 0 }}</h3>
+        <button (click)="getorderscancelled()">عرض</button>
+      </div>
+    </div>
+    <div class="card danger card-tilt animate-card-in">
+      <div class="card-header">الحجوزات الملغية</div>
+      <div class="card-body">
+        <h3>{{ displayedValues.reservationCancelled || 0 }}</h3>
+        <button (click)="getreservationscancelled()">عرض</button>
+      </div>
+    </div>
+  </div>
+
+</div>

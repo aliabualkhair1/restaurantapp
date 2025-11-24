@@ -1,0 +1,50 @@
+<div class="login-dark">
+  <form [formGroup]="loginform" (ngSubmit)="submit()">
+
+    <div *ngIf="isdeleted" class="restore-message">
+      <p>تم حذف حسابك.</p>
+      <p>هل ترغب في استعادته؟</p>
+      <button (click)="restoreaccount()" type="button" class="btn-restore">استعادة الحساب</button>
+    </div>
+
+    <div *ngIf="apiMessage" 
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
+
+
+    <div class="illustration">
+      <i class="icon ion-ios-locked-outline"></i>
+    </div>
+
+    <div class="form-group">
+      <label for="111">البريد الإلكتروني</label>
+      <input class="form-control" type="email" placeholder="البريد الإلكتروني" formControlName="email" id="111">
+      <div *ngIf="email?.touched && email?.invalid" class="error">
+        <small *ngIf="email?.errors?.['required']">البريد الإلكتروني مطلوب.</small>
+        <small *ngIf="email?.errors?.['email']">صيغة البريد الإلكتروني غير صحيحة.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="123">كلمة المرور</label>
+      <input class="form-control" type="password" placeholder="كلمة المرور" formControlName="password" id="123">
+      <div *ngIf="password?.touched && password?.invalid" class="error">
+        <small *ngIf="password?.errors?.['required']">كلمة المرور مطلوبة.</small>
+        <small *ngIf="password?.errors?.['minlength']">يجب أن تكون كلمة المرور 6 أحرف على الأقل.</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="loginform.invalid">تسجيل الدخول</button>
+
+    <div class="register-inline">
+      <p>نسيت كلمة المرور ؟</p>
+      <button routerLink="/checkdata" type="button" class="btn-link">إعادة تعيين كلمة المرور</button>
+    </div>
+    <div class="register-inline">
+      <p>ليس لديك حساب؟</p>
+      <button routerLink="/register" type="button" class="btn-link">سجل الآن</button>
+    </div>
+  </form>
+</div>

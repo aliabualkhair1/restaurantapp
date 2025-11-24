@@ -1,0 +1,86 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && table.length>0">
+  <button (click)="restoretables()" class="btn btn-success top-btn">
+    <i class="bi bi-arrow-clockwise"></i> استعادة ترابيزات محذوفة
+  </button>
+  <button (click)="addtable()" class="btn btn-warning top-btn">
+    <i class="bi bi-x-octagon"></i> إضافة ترابيزة
+  </button>
+</div>
+
+<div class="search-section w-100 mb-4" *ngIf="table.length>0">
+  <div class="container-fluid">
+    <div class="search-box d-flex align-items-center justify-content-center w-100">
+      <input [(ngModel)]="tablenumber" placeholder="البحث برقم الطاولة..." type="text" class="form-control search-input flex-grow-1"/>
+      <button (click)="search(tablenumber)" class="btn btn-primary ms-2 px-4">
+        <i class="bi bi-search"></i> بحث
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row" *ngIf="!loading && table.length > 0">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let tables of table">
+    <div class="card h-100 shadow-sm menu-card">
+      <div class="card-header bg-card-header text-white d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">رقم الترابيزة{{ tables.tableNumber }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="item-image mb-3">
+          <img [src]="environment+'/Images/'+ tables.tableImage" alt="{{ tables.tableImage }}" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" />
+        </div>
+        <p class="card-text text-muted mb-3">
+          <strong>المكان:</strong> {{ tables.location || 'غير متوفر' }}
+        </p>
+        <div class="details-section mb-3">
+          <div class="d-flex justify-content-between align-items-center detail-item mb-2">
+            <strong>السعة:</strong>
+            <span class="badge text-bg-info category-badge">{{ tables.capacity }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center detail-item">
+            <strong>الحالة:</strong>
+            <span class="status-pill" [class.status-available]="tables.status === 'Available'" [class.status-unavailable]="tables.status === 'Unavailable'">
+              {{ tables.status === 'Available' ? 'متاحة' : 'غير متاحة' }}
+            </span>
+          </div>
+        </div>
+        <div class="card-footer bg-card-footer">
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <button (click)="booktable(tables.id)" class="btn btn-sm btn-outline-success flex-grow-1" *ngIf="isAdmin || isAdminAssistant || isStaff || isCustomer">
+              <i class="bi bi-pencil-square"></i> حجز الترابيزة
+            </button>
+            <button (click)="login()" class="btn btn-sm btn-outline-success flex-grow-1" *ngIf="!isAdmin && !isAdminAssistant && !isStaff && !isCustomer">
+              <i class="bi bi-pencil-square"></i> سجل دخول الأن للحجز
+            </button>
+            <button (click)="updatetable(tables.id)" class="btn btn-sm btn-outline-primary flex-grow-1" *ngIf="isAdmin || isAdminAssistant">
+              <i class="bi bi-pencil-square"></i> تعديل
+            </button>
+            <button (click)="deletetable(tables.id)" class="btn btn-sm btn-outline-danger flex-grow-1" *ngIf="isAdmin || isAdminAssistant">
+              <i class="bi bi-trash"></i> حذف
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="!loading && table.length > 0">
+  <button class="btn btn-outline-secondary" (click)="prevPage()" [disabled]="currentpage === 1">السابق</button>
+  <span class="fw-bold">صفحة {{currentpage}} من {{totalpages}}</span>
+  <button class="btn btn-outline-secondary" (click)="nextPage()" [disabled]="currentpage === totalpages">التالي</button>
+</div>
+
+<div *ngIf="table.length==0" class="empty-cart">
+  <h3>لا توجد أى ترابيزات حتى الأن</h3>
+  <button *ngIf="isAdmin || isAdminAssistant" (click)="addtable()">أضف الأن</button>
+</div>

@@ -1,0 +1,58 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let reservation of userreservations">
+    <div class="card menu-card h-100">
+      
+      <div class="card-header">
+        <h5 class="card-title mb-0 text-center">
+          <strong>تاريخ الحجز:</strong> {{ reservation.dateOfReservation }}
+        </h5>
+      </div>
+
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item">
+            <strong>تاريخ البداية:</strong>
+        <span>{{ '2005-06-22T' + reservation.startDate | date:'hh:mm a' }}</span>
+          </li>
+
+          <li class="list-group-item">
+            <strong>تاريخ النهاية:</strong>
+        <span>{{ '2005-06-22T' + reservation.endDate | date:'hh:mm a' }}</span>
+          </li>
+
+          <li class="list-group-item">
+            <strong>عدد الضيوف:</strong>
+            <span>{{ reservation.numberOfGuests }}</span>
+          </li>
+
+          <li class="list-group-item">
+            <strong>رقم الطاولة:</strong>
+            <span>{{ reservation.tableNumber }}</span>
+          </li>
+
+          <li class="list-group-item">
+            <strong>موقع الطاولة:</strong>
+            <span>{{ reservation.tableLocation }}</span>
+          </li>
+
+          <li class="list-group-item">
+            <strong>حالة الحجز:</strong>
+            <span>{{ reservation.status }}</span>
+          </li>
+
+        </ul>
+
+        <div class="card-footer total-price-row d-flex justify-content-between align-items-center">
+          <strong>مدفوع؟</strong>
+          <span>{{ reservation.isPaid ?'نعم':'لا' }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

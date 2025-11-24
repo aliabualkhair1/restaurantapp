@@ -1,0 +1,39 @@
+<div class="login-dark">
+  <form [formGroup]="formgroup" (ngSubmit)="submit()">
+    <div class="illustration">
+      <i class="icon ion-ios-locked-outline"></i>
+    </div>
+    
+    <div class="form-group">
+      <label for="1">إسم المستخدم</label>
+      <input id="1" class="form-control" placeholder="إسم المستخدم" formControlName="UserName">
+      <div class="error">
+        <small *ngIf="UserName?.touched && UserName?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="UserName?.touched && UserName?.errors?.['pattern']">خطأ فى إسم المستخدم</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="6">البريد الإلكتروني</label>
+      <input id="6" class="form-control" type="email" placeholder="البريد الإلكتروني" formControlName="Email">
+      <div class="error">
+        <small *ngIf="Email?.touched && Email?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="Email?.touched && Email?.errors?.['email']">صيغة البريد الإلكتروني غير صحيحة</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="111">الرقم القومى</label>
+      <input id="111" class="form-control" type="text" placeholder="الرقم القومى" formControlName="NationalId">
+      <div class="error">
+        <small *ngIf="NationalId?.errors?.['serverErrors']">{{ NationalId?.errors?.['serverErrors'] }}</small>
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['pattern']">يجب أن يكون الرقم القومى مكوّن من 14 رقم</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="formgroup.invalid">
+      إرسال
+    </button>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+    <div *ngIf="apiMessage" 
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
+<div class="categories-list" *ngIf="!loading">
+  <div class="category-row" *ngFor="let cas of complaintsandsuggestions">
+    <span class="cat-id">{{cas.id}}</span>
+    <span class="cat-name">{{cas.date| date:'dd/MM/yyyy hh:mm a'}}</span>
+    <span class="cat-name">{{cas.problemandsolving}}</span>
+    <div class="row-actions">
+      <button class="btn btn-success" (click)="restore(cas.id)">إسترجاع</button>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="complaintsandsuggestions.length==0" class="empty-cart">
+<h3>لا توجد أى شكاوى محذوفة حتى الأن</h3>
+</div>
+

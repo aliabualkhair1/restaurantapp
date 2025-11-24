@@ -1,0 +1,36 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+<div class="row g-4" *ngIf="!loading">
+    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let question of getquestions">
+        <div class="card menu-card h-100">
+
+            <div class="card-header">
+                <h5 class="card-title mb-0 text-center">
+                    <strong>تاريخ الإرسال:</strong> {{ question.dateOfSending | date:'dd/MM/yyyy hh:mm a'}}
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong> الإسم:</strong>
+                        <span>{{ question.fullName }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>البريد الإلكتروني</strong>
+                        <span>{{ question.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>الرسالة</strong>
+                        <span>{{ question.message }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="getquestions.length==0" class="empty-cart">
+    <h3>لا توجد أى رسائل حتى الآن</h3>
+</div>

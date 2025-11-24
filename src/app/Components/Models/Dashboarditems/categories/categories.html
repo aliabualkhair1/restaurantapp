@@ -1,0 +1,36 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+<div class="search-container" *ngIf="categories.length>0">
+  <div class="search-box">
+    <input [(ngModel)]="name" placeholder="بحث بإسم الفئة" type="text">
+    <button (click)="search(name)">بحث</button>
+  </div>
+</div>
+
+<div class="action-buttons-vertical" *ngIf="categories.length>0">
+  <button class="btn btn-success" (click)="addcategory()">إضافة فئة</button>
+  <button class="btn btn-warning" (click)="restoredeletedcategories()">إسترجاع الفئات المحذوفة</button>
+</div>
+
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="categories-list" *ngIf="!loading">
+  <div class="category-row" *ngFor="let cat of categories">
+    <span class="cat-id">{{cat.id}}</span>
+    <span class="cat-name">{{cat.name}}</span>
+    <div class="row-actions">
+      <button class="btn btn-danger" (click)="deletedcategorybyid(cat.id)">حذف</button>
+      <button class="btn btn-primary" (click)="updatecategory(cat.id)">تعديل</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="categories.length==0" class="empty-cart">
+<h3>لا توجد أى فئة حتى الأن</h3>
+<button (click)="category()">أضف </button>
+</div>

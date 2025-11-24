@@ -1,0 +1,49 @@
+<div class="login-dark">
+  <form [formGroup]="formgroup" (ngSubmit)="submit()">
+    <div class="illustration">
+      <i class="icon ion-ios-locked-outline"></i>
+    </div>
+    <div *ngIf="apiMessage" 
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
+    <div class="form-group">
+      <label>الرقم القومي</label>
+      <input class="form-control" type="text" placeholder="الرقم القومي" formControlName="NationalId">
+      <div *ngIf="NationalId?.touched && NationalId?.invalid" class="error">
+        <small *ngIf="NationalId?.errors?.['required']">الرقم القومي مطلوب.</small>
+        <small *ngIf="NationalId?.errors?.['pattern']">يجب أن يكون الرقم القومي مكون من 14 رقم.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>اسم المستخدم</label>
+      <input class="form-control" placeholder="اسم المستخدم" formControlName="UserName">
+      <div *ngIf="UserName?.touched && UserName?.invalid" class="error">
+        <small *ngIf="UserName?.errors?.['required']">اسم المستخدم مطلوب.</small>
+        <small *ngIf="UserName?.errors?.['pattern']">اسم المستخدم غير صالح.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input class="form-control" type="email" placeholder="البريد الإلكتروني" formControlName="Email">
+      <div *ngIf="Email?.touched && Email?.invalid" class="error">
+        <small *ngIf="Email?.errors?.['required']">البريد الإلكتروني مطلوب.</small>
+        <small *ngIf="Email?.errors?.['email']">صيغة البريد الإلكتروني غير صحيحة.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>كلمة المرور</label>
+      <input class="form-control" type="password" placeholder="كلمة المرور" formControlName="Password">
+      <div *ngIf="Password?.touched && Password?.invalid" class="error">
+        <small *ngIf="Password?.errors?.['required']">كلمة المرور مطلوبة.</small>
+        <small *ngIf="Password?.errors?.['minlength']">يجب أن تكون كلمة المرور 6 أحرف على الأقل.</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="formgroup.invalid">استعادة الحساب</button>
+  </form>
+</div>

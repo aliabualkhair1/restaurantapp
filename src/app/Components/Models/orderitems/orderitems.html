@@ -1,0 +1,36 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let orderitems of orderitem">
+    <div class="card menu-card h-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0 text-center">
+          <strong>اسم القائمة:</strong> {{ orderitems.menuName }}
+        </h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <strong>اسم العنصر:</strong> {{ orderitems.itemName }}
+        </p>
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>سعر العنصر:</strong>
+            <span>{{ orderitems.price }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>كمية العنصر:</strong>
+            <span>{{ orderitems.quantity }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-footer total-price-row">
+        <strong> الإحمالى:</strong>
+        <span>{{ orderitems.subTotal }}</span>
+      </div>
+    </div>
+  </div>
+</div>

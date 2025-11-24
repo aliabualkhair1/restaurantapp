@@ -1,0 +1,12 @@
+<div class="d-flex flex-wrap gap-2 justify-content-end">
+  <button *ngIf="!appear" class="btn btn-sm btn-outline-primary flex-grow-1 update-hover-btn" (click)="appear=true">
+      <i class="bi bi-pencil"></i> تحديث
+  </button>
+
+  <div *ngIf="appear" class="d-flex gap-2 update-row w-100">
+      <input type="number" [(ngModel)]="quantity" placeholder="الكمية" class="form-control update-input">
+      <button class="btn btn-sm btn-outline-primary update-btn" (click)="update()" [disabled]="!quantity || quantity <= 0">
+          <i class="bi bi-pencil"></i> تحديث
+      </button>
+  </div>
+</div>

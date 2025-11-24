@@ -1,0 +1,54 @@
+.menu-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+  border: 1px solid #e3e3e3;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card .card-header {
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: #fff;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 2px solid #ff8a75;
+}
+
+.menu-card .list-group-item {
+  background-color: #fff;
+  border: none;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: #333;
+  transition: background-color 0.2s;
+}
+
+.menu-card .list-group-item:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.menu-card .list-group-item strong {
+  font-weight: 600;
+  color: #222;
+}
+
+.text-wrap {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 220px;
+}

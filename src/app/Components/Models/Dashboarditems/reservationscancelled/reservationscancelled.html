@@ -1,0 +1,31 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let reservation of reservations">
+    <div class="card menu-card h-100">
+      
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>معرّف المستخدم:</strong>
+            <span>{{ reservation.userId }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>اسم المستخدم:</strong>
+            <span>{{ reservation.username }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <button class="get-items-btn" (click)="getuserreservationscancelled(reservation.userId)">
+        عرض حجوزات المستخدم
+      </button>
+      
+    </div>
+  </div>
+</div>
+<div *ngIf="reservations.length==0" class="empty-cart">
+<h3>لا توجد أى حجوزات ملغية حتى الأن</h3>
+</div>

@@ -1,0 +1,76 @@
+<div class="universal-form-wrapper">
+  <div class="app-form">
+    <form [formGroup]="formgroup" (ngSubmit)="submit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <h3>إضافة عنصر للقائمة</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="itemName">اسم العنصر</label>
+        <input 
+          id="itemName" 
+          type="text" 
+          class="form-control" 
+          placeholder="أدخل اسم العنصر" 
+          formControlName="ItemName"
+        />
+        <div *ngIf="ItemName?.touched && ItemName?.invalid" class="error">
+          <small *ngIf="ItemName?.errors?.['required']">اسم العنصر مطلوب.</small>
+          <small *ngIf="ItemName?.errors?.['pattern']">مسموح بالحروف فقط.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="itemImage">صورة العنصر</label>
+        <input
+          id="itemImage"
+          type="file"
+          class="form-control" 
+          placeholder="اختر صورة"
+          formControlName="ItemImage"
+          (change)="onFileSelected($event)"
+        />
+        <div *ngIf="ItemImage?.touched && ItemImage?.invalid" class="error">
+          <small *ngIf="ItemImage?.errors?.['required']">الصورة مطلوبة.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">السعر</label>
+        <input 
+          id="price" 
+          type="number" 
+          class="form-control" 
+          placeholder="أدخل السعر" 
+          formControlName="Price"
+        />
+        <div *ngIf="Price?.touched && Price?.invalid" class="error">
+          <small *ngIf="Price?.errors?.['required']">السعر مطلوب.</small>
+          <small *ngIf="Price?.errors?.['pattern']">مسموح بالأرقام فقط.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">الكمية</label>
+        <input 
+          id="quantity" 
+          type="number" 
+          class="form-control" 
+          placeholder="أدخل الكمية" 
+          formControlName="Quantity"
+        />
+        <div *ngIf="Quantity?.touched && Quantity?.invalid" class="error">
+          <small *ngIf="Quantity?.errors?.['required']">الكمية مطلوبة.</small>
+          <small *ngIf="Quantity?.errors?.['pattern']">مسموح بالأرقام فقط.</small>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="formgroup.invalid">إضافة العنصر</button>
+    </form>
+  </div>
+</div>

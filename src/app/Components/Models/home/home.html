@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم الخير</title>
+</head>
+<body>
+<section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>تجربة طعام لا تُنسى</h1>
+        <p>استمتع بأشهى المأكولات في أجواء ساحرة وفاخرة</p>
+        <a routerLink="/menu" class="btn">اطلب الآن</a>
+    </div>
+</section>
+<section id="about" class="about reveal">
+    <div class="about-container">
+        <div class="about-text"> 
+            <h1>من نحن</h1>
+            <p>مطعمنا يجمع بين الجودة والفخامة في كل طبق. نقدم لك تجربة طعام استثنائية مع أفضل المكونات الطازجة والديكور الرائع.</p>
+            <a routerLink="/menu" class="btn-outline btn-desktop">استكشف المينيو</a>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="عن المطعم">
+            <a routerLink="/menu" class="btn-outline btn-mobile">استكشف المينيو</a>
+        </div>
+    </div>
+</section>
+<section id="menu" class="menu reveal">
+    <h1>قائمة الطعام</h1>
+    <div class="menu-container">
+        <div class="menu-item" *ngFor="let items of selecteditems">
+            <img [src]="environment+'/Images/'+ items.itemImage" alt="{{ items.itemImage }}" />
+            <h4>{{items.menuName}}</h4>
+            <p>{{items.itemName}}</p>
+        </div>
+    </div>
+    <div class="menu-footer">
+        <a routerLink="/menu" class="btn-outline">اضغط هنا لعرض الكل</a>
+    </div>
+</section>
+<section id="contact" class="contact reveal">
+    <div *ngIf="apiMessage" 
+         [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+         style="margin: 0 auto 20px; text-align: center;">
+        {{ apiMessage }}
+    </div>
+    <h1>اتصل بنا</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <input type="text" formControlName="FullName" placeholder="اسمك ثلاثى">
+
+        <div class="error" *ngIf="fullname.touched && fullname.invalid">
+            <span *ngIf="fullname.errors?.['required']">هذا الحقل مطلوب</span>
+            <span *ngIf="fullname.errors?.['minlength']">الاسم يجب أن يكون 11 حروف على الأقل</span>
+            <span *ngIf="fullname.errors?.['maxlength']">الاسم يجب ألا يزيد عن 28 حرف</span>
+            <span *ngIf="fullname.errors?.['pattern']">الاسم يجب أن يحتوي على حروف فقط</span>
+        </div>
+
+        <input type="email" formControlName="Email" placeholder="بريدك الإلكتروني">
+
+        <div class="error" *ngIf="email.touched && email.invalid">
+            <span *ngIf="email.errors?.['required']">هذا الحقل مطلوب</span>
+            <span *ngIf="email.errors?.['email']">البريد الإلكتروني غير صالح</span>
+        </div>
+
+        <textarea formControlName="Message" placeholder="رسالتك" rows="5"></textarea>
+
+        <div class="error" *ngIf="message.touched && message.invalid">
+            <span *ngIf="message.errors?.['required']">هذا الحقل مطلوب</span>
+            <span *ngIf="message.errors?.['pattern']">الرسالة تحتوي على رموز غير مسموح بها</span>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="form.invalid">إرسال</button>
+    </form>
+</section>
+<footer class="footer">
+  <p>جميع الحقوق محفوظة مطعم الخير © {{ currentYear }}.</p>
+</footer>
+</body>
+</html>

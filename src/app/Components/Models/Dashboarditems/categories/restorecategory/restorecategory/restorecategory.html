@@ -1,0 +1,25 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+<div class="search-container" *ngIf="categories.length>0">
+  <div class="search-box">
+    <input [(ngModel)]="name" placeholder="بحث بإسم المينيو" type="text">
+    <button (click)="search(name)">بحث</button>
+  </div>
+</div>
+<div class="categories-list" *ngIf="!loading">
+  <div class="category-row" *ngFor="let cat of categories">
+    <span class="cat-id">{{cat.id}}</span>
+    <span class="cat-name">{{cat.name}}</span>
+    <button class="btn-restore" (click)="restorecategorybyid(cat.id)">إسترجاع</button>
+  </div> 
+</div>
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="categories.length==0" class="empty-cart">
+<h3>لا توجد أى فئات محذوفة  حتى الأن</h3>
+</div>
+

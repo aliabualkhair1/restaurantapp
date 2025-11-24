@@ -1,0 +1,32 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let ordersfeedback of userreservationsfeedback">
+    <div class="card menu-card h-100">
+
+      <div class="card-header">
+        <h5 class="card-title mb-0 text-center">
+          <strong>تاريخ الحجز:</strong> {{ ordersfeedback.reservationDate }}
+        </h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>تاريخ الإرسال:</strong>
+            <span>{{ ordersfeedback.submittedOn }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>التعليق:</strong>
+            <span>{{ ordersfeedback.comment }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>التقييم:</strong>
+            <span>{{ ordersfeedback.rating }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

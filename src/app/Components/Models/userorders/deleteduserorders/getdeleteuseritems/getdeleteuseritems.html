@@ -1,0 +1,45 @@
+<div class="page-wrapper">
+  <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+    {{ apiMessage }}
+  </div>
+
+  <div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of orderitems">
+      <div class="menu-card">
+        <div class="card-header">{{ item.menuName }}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>اسم المنتج:</strong>
+            <span>{{ item.itemName }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>الكمية:</strong>
+            <span>{{ item.quantity }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>السعر:</strong>
+            <span>{{ item.price }}</span>
+          </li>
+          <li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
+            <strong>السعر الإجمالي:</strong>
+            <span>{{ item.subTotal }}</span>
+          </li>
+        </ul>
+        <div class="card-footer">
+          <button (click)="restore(item.id)" class="get-items-btn">
+            استعادة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="empty-cart" *ngIf="orderitems.length==0">
+  <h3>لا توجد أى عناصر محذوفة حتى الآن</h3>
+</div>

@@ -1,0 +1,78 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="menuitems.length>0">
+  <button (click)="getdeletedmenuitems()" class="btn btn-success top-btn">
+    <i class="bi bi-arrow-clockwise"></i> استرجاع عنصر قائمة
+  </button>
+  <button (click)="unavailable()" class="btn btn-warning top-btn">
+    <i class="bi bi-x-octagon"></i> العناصر غير المتاحة
+  </button>
+</div>
+
+<div class="filters" *ngIf="menuitems.length>0">
+  <input type="text" [(ngModel)]="menuName" placeholder="اسم القائمة" />
+  <input type="text" [(ngModel)]="itemName" placeholder="اسم الصنف" />
+  <input type="number" [(ngModel)]="minPrice" placeholder="أقل سعر" />
+  <input type="number" [(ngModel)]="maxPrice" placeholder="أعلى سعر" />
+  <input type="number" [(ngModel)]="price" placeholder="السعر" />
+  <button (click)="applyFilter()">تطبيق الفلتر</button>
+  <button (click)="getmenuitems(currentpage)">إعادة تعيين</button>
+</div>
+
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of menuitems">
+    <div>
+    <div class="card h-100 shadow-sm menu-card">
+      <div class="card-header bg-card-header text-white d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">{{ item.menuName}}</h5>
+      </div>
+
+      <div class="card-body text-center">
+        <div class="item-image mb-3">
+          <img [src]="environment+'/Images/'+ item.itemImage" alt="{{ item.itemImage }}" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" />
+        </div>
+
+        <h6 class="fw-bold text-dark mb-3">{{ item.itemName }}</h6>
+
+        <ul class="list-group list-group-flush border-top border-bottom my-3 text-start">
+          <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+            <strong>الكمية:</strong>
+            <span class="badge text-bg-info category-badge">{{ item.quantity }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+            <strong>السعر:</strong>
+            <span class="badge text-bg-success category-badge">{{ item.price}}</span>
+          </li>
+
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <button (click)="update(item.id)" class="btn btn-sm btn-outline-primary flex-grow-1">
+              <i class="bi bi-pencil-square"></i> تعديل
+            </button>
+            <button (click)="delete(item.id)" class="btn btn-sm btn-outline-danger flex-grow-1">
+              <i class="bi bi-trash"></i> حذف
+            </button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="menuitems.length>0">
+  <button class="btn btn-outline-secondary" (click)="prevpage()" [disabled]="currentpage === 1">السابق</button>
+  <span class="fw-bold">الصفحة {{currentpage}} من {{totalpages}}</span>
+  <button class="btn btn-outline-secondary" (click)="nextpage()" [disabled]="currentpage === totalpages">التالي</button>
+</div>
+<div *ngIf="menuitems.length==0" class="empty-cart">
+  <h3>لا توجد أى عناصر حتى الأن</h3>
+  <button (click)="addmenuitem()">أضف </button>
+</div>
+
+

@@ -1,0 +1,38 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+<div class="text-center w-100 my-4" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let orderitems of order">
+    <div class="card menu-card h-100">
+      <div class="card-header">
+        <h5 class="mb-0"> معرف عنصر المينيو : {{ orderitems.menuItemId }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span>الكمية:</span>
+          <strong>{{ orderitems.quantity }}</strong>
+        </div>
+        <div class="btn-actions">
+          <button (click)="delete(orderitems.menuItemId)" class="btn btn-danger">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12" *ngIf="order.length>0">
+    <button (click)="adduserorder()" class="btn btn-success w-100">
+      <i class="bi bi-pencil-square"></i> أضف الطلب
+    </button>
+  </div>
+</div>
+
+<div *ngIf="order.length==0" class="empty-cart">
+  <h3>لا توجد أى طلبات فى السلة حتى الأن</h3>
+  <button (click)="menu()">أضف الأن</button>
+</div>

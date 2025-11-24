@@ -1,0 +1,36 @@
+<div class="universal-form-wrapper" dir="rtl">
+  <div class="app-form">
+    <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <i class="bi bi-chat-dots"></i>
+        <h3>تحديث التقييم</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="1">التعليق</label>
+        <input id="1" type="text" class="form-control" placeholder="اكتب تعليقك" formControlName="Comment">
+        <div class="error">
+          <small *ngIf="Comment?.errors?.['serverErrors']">{{Comment?.errors?.['serverErrors']}}</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="2">التقييم</label>
+        <input id="2" type="text" class="form-control" placeholder="التقييم من 0 إلى 5" formControlName="Rating">
+        <div class="error">
+          <small *ngIf="Rating?.errors?.['serverErrors']">{{Rating?.errors?.['serverErrors']}}</small>
+          <small *ngIf="Rating?.errors?.['pattern']">القيمة يجب أن تكون بين 0 و 5 فقط.</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">تحديث التقييم</button>
+
+    </form>
+  </div>
+</div>

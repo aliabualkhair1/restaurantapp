@@ -1,0 +1,62 @@
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+<div class="search-section w-100 mb-4" *ngIf="userreservationsfeedback.length">
+  <div class="container-fluid">
+    <div class="search-box d-flex align-items-center justify-content-center w-100">
+      <input
+        [(ngModel)]="date"
+        placeholder="ابحث بتاريخ الحجز..."
+        type="date"
+        class="form-control search-input flex-grow-1"
+      />
+      <button (click)="search(date)" class="btn btn-primary ms-2 px-4">
+        <i class="bi bi-search"></i> بحث
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="text-center w-100 my-4" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let feedback of userreservationsfeedback">
+    <div class="card menu-card h-100">
+
+      <div class="card-header">
+        <h5 class="card-title mb-0 text-center">
+          <strong>تاريخ الحجز:</strong> {{ feedback.reservationDate }}
+        </h5>
+      </div>
+
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>تاريخ الإرسال:</strong>
+            <span>{{ feedback.submittedOn }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>التعليق:</strong>
+            <span>{{ feedback.comment }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>التقييم:</strong>
+            <span>{{ feedback.rating }}</span>
+          </li>
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <button (click)="restore(feedback.id)" class="btn btn-sm btn-outline-success flex-grow-1">
+              <i class="bi bi-arrow-clockwise"></i> استرجاع
+            </button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="userreservationsfeedback.length==0" class="empty-cart">
+  <h3>لا توجد أى تقييمات حجوزات محذوفة حتى الآن</h3>
+</div>

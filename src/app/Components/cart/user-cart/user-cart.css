@@ -1,0 +1,116 @@
+.menu-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card .card-header {
+    background: linear-gradient(90deg, #4b6cb7, #182848);
+    color: #fff;
+    padding: 16px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid #ff9f80;
+}
+
+.menu-card .card-body {
+    flex: 1;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-card .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 0.95rem;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-card .info-row:last-child {
+    border-bottom: none;
+}
+
+.menu-card .btn-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.menu-card .btn {
+    flex: 1;
+    padding: 10px 0;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.menu-card .btn-danger:hover {
+    transform: translateY(-2px);
+    background-color: #d32f2f;
+}
+
+.menu-card .btn-success:hover {
+    transform: translateY(-2px);
+    background-color: #388e3c;
+}
+.empty-cart {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fdfdfd;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  max-width: 450px;
+  margin-top:15%;
+  margin-right:35%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+.empty-cart:hover {
+  transform: translateY(-5px);
+}
+.empty-cart h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.empty-cart button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.empty-cart button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+ .alert.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.alert.error {
+  background-color: #f44336;
+  color: white;
+}

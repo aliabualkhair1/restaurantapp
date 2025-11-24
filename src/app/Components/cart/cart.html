@@ -1,0 +1,29 @@
+<div>
+  <div *ngIf="isauth">
+    <button *ngIf="!appear" class="btn btn-success" (click)="appear=true">
+      أضف إلى السلة
+    </button>
+  </div>
+
+  <div *ngIf="!isauth">
+    <button *ngIf="!appear" class="btn btn-success" (click)="login()">
+      سجل دخول الأن للإضافة
+    </button>
+  </div>
+
+  <div *ngIf="appear" class="d-flex w-50">
+    <input 
+      required 
+      type="number" 
+      [(ngModel)]="amount" 
+      placeholder="الكمية" 
+      class="form-control">
+
+    <button 
+      class="btn btn-primary" 
+      (click)="add()" 
+      [disabled]="!amount || amount <= 0">
+      أضف
+    </button>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="universal-form-wrapper">
+  <div class="app-form">
+    <form [formGroup]="reactiveform" (ngSubmit)="submit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <i class="bi bi-chat-dots"></i>
+        <h3>إضافة مينيو</h3>
+      </div>
+      <div class="form-group">
+        <label for="item" class="form-label fw-bold">الفئة</label>
+
+        <select 
+          id="item" 
+          class="form-select"
+          formControlName="CategoryId"
+          [ngClass]="{ 'error': CategoryId?.touched && CategoryId?.invalid }"
+        >
+          <option value="" selected disabled>- حدد الفئة -</option>
+          <option *ngFor="let cat of category" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+
+        <div *ngIf="CategoryId?.touched && CategoryId?.invalid" class="text-danger">
+          <small *ngIf="CategoryId?.errors?.['required']">غير مسموح بتركه فارغ.</small>
+          <small *ngIf="CategoryId?.errors?.['pattern']">غير مسموح إلا بالأرقام.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="MenuName">إسم المينيو</label>
+        <input 
+          id="MenuName"
+          type="text"
+          class="form-control"
+          placeholder="إسم المينيو"
+          formControlName="MenuName"
+        />
+        <div *ngIf="MenuName?.touched && MenuName?.invalid" class="error">
+          <small *ngIf="MenuName?.errors?.['required']">غير مسموح بتركه فارغ.</small>
+          <small *ngIf="MenuName?.errors?.['pattern']">غير مسموح بالرموز و الأرقام.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="menuDesc">وصف المينيو</label>
+        <input 
+          id="menuDesc"
+          type="text"
+          class="form-control"
+          placeholder="الوصف"
+          formControlName="Description"
+        />
+        <div *ngIf="Description?.touched && Description?.invalid" class="error">
+          <small *ngIf="Description?.errors?.['required']">غير مسموح بتركه فارغ.</small>
+          <small *ngIf="Description?.errors?.['pattern']">غير مسموح بالرموز و الأرقام.</small>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="reactiveform.invalid">
+        إضافة المينيو
+      </button>
+
+    </form>
+  </div>
+</div>

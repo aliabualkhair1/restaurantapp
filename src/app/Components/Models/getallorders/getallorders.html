@@ -1,0 +1,55 @@
+<div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row" *ngIf="!loading">
+    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let order of orders">
+        <div class="card mb-3 menu-card h-100">
+            
+            <div class="card-header">
+                <h6 class="card-title mb-0">
+                    <strong>معرّف المستخدم:</strong>
+                    <span class="ms-2">{{ order.userId }}</span>
+                </h6>
+            </div>
+
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item user-name-header d-flex justify-content-between align-items-center">
+                        <strong>اسم المستخدم:</strong>
+                        <span>{{ order.username }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>معرّف الطلب:</strong>
+                        <span>{{ order.orderId }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>تاريخ الطلب:</strong>
+                        <span>{{ order.orderDate }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center order-status-row">
+                        <strong>حالة الطلب:</strong>
+                        <span class="order-status-badge">{{ order.status }}</span>
+                    </li>
+                    <li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
+                        <strong>السعر الإجمالي:</strong>
+                        <span>{{ order.totalPrice }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-footer hover-footer">
+                <button 
+                    (click)="getorderitemsbyorderid(order.orderId)" 
+                    class="btn w-100 get-items-btn transparent-btn">
+                    عرض عناصر الطلب
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="orders.length==0" class="empty-cart">
+<h3>لا توجد أى طلبات حتى الأن</h3>
+</div>
+

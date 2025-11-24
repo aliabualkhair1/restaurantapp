@@ -1,0 +1,54 @@
+<div class="universal-form-wrapper" dir="rtl">
+  <div class="app-form">
+    <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+      <div *ngIf="apiMessage" 
+       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+       style="margin: 0 auto 20px; text-align: center;">
+      {{ apiMessage }}
+      </div>
+
+      <div class="form-header">
+        <i class="bi bi-calendar-check"></i>
+        <h3>احجز الآن</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="1">عدد الضيوف</label>
+        <input id="1" type="text" class="form-control" placeholder="عدد الضيوف" formControlName="numberOfGuests">
+        <div class="error" *ngIf="numberOfGuests?.invalid && (numberOfGuests?.touched || reactiveform.touched)">
+          <small *ngIf="numberOfGuests?.errors?.['pattern']">مسموح بالأرقام فقط و الأرقام الصفرية أو السالبة غير مسموح بها</small>
+          <small *ngIf="numberOfGuests?.errors?.['maxlength']">أقصى عدد = 99</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="2">تاريخ الحجز</label>
+        <input id="2" type="date" class="form-control" placeholder="تاريخ الحجز" formControlName="dateOfReservation">
+        <div class="error" *ngIf="dateOfReservation?.invalid && (dateOfReservation?.touched || reactiveform.touched)">
+          <small *ngIf="dateOfReservation?.errors?.['required']">تاريخ الحجز مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="3">وقت البدء</label>
+        <input id="3" type="time" class="form-control" placeholder="وقت البدء" formControlName="startDate">
+        <div class="error" *ngIf="startDate?.invalid && (startDate?.touched || reactiveform.touched)">
+          <small *ngIf="startDate?.errors?.['required']">وقت البدء مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="4">وقت الانتهاء</label>
+        <input id="4" type="time" class="form-control" placeholder="وقت الانتهاء" formControlName="endDate">
+        <div class="error" *ngIf="endDate?.invalid && (endDate?.touched || reactiveform.touched)">
+          <small *ngIf="endDate?.errors?.['required']">وقت الانتهاء مطلوب</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="reactiveform.invalid">
+        احجز الآن
+      </button>
+
+    </form>
+  </div>
+</div>

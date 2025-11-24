@@ -1,0 +1,75 @@
+.top-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.top-buttons-container .top-btn {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.top-buttons-container .top-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.user-details-wrapper {
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    border-radius: 1rem !important;
+    overflow: hidden;
+}
+.card-header.bg-gradient {
+  background: linear-gradient(90deg, #4b6cb7, #182848) !important;
+    color: white;
+    padding: 1.25rem 2rem !important;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+}
+
+.data-box {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #495057;
+    background-color: #f7f9fc;
+    border: 1px solid #e0e6f0;
+    border-left: 5px solid #182848;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.data-box:hover {
+    background-color: #eaf0ff;
+    border-left-color: #007bff;
+}
+.data-box.role {
+    color: #28a745;
+    background-color: #e6f6e9;
+    border-color: #c8e6c9;
+    border-left: 5px solid #28a745;
+    font-weight: 700;
+}
+
+.col-md-4 label, .col-md-6 label, .col-sm-6 label, .col-sm-12 label {
+    display: block;
+    font-size: 0.85rem;
+        font-weight: 700 !important; 
+    
+    color: #555555 !important; 
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem !important;
+}
+.card-body .row {
+    --bs-gutter-y: 1.5rem; 
+}

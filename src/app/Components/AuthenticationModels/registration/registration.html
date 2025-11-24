@@ -1,0 +1,99 @@
+<div class="login-dark">
+  <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+    
+    <div *ngIf="apiMessage" 
+         [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+         class="full-width message-alert">
+      {{ apiMessage }}
+    </div>
+
+    <div class="illustration">
+      <i class="icon ion-ios-locked-outline"></i>
+    </div>
+    
+    <div class="form-group">
+      <label>الاسم الأول</label>
+      <input class="form-control" placeholder="الاسم الأول" formControlName="FirstName">
+      <div class="error">
+        <small *ngIf="FirstName?.touched && FirstName?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="FirstName?.touched && FirstName?.errors?.['minlength']">الاسم قصير جدًا</small>
+        <small *ngIf="FirstName?.touched && FirstName?.errors?.['maxlength']">الاسم طويل جدًا</small>
+        <small *ngIf="FirstName?.touched && FirstName?.errors?.['pattern']">الاسم يجب أن يحتوي على حروف إنجليزية فقط بدون مسافات </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>اسم العائلة</label>
+      <input class="form-control" placeholder="اسم العائلة" formControlName="LastName">
+      <div class="error">
+        <small *ngIf="LastName?.touched && LastName?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="LastName?.touched && LastName?.errors?.['minlength']">اسم العائلة قصير جدًا</small>
+        <small *ngIf="LastName?.touched && LastName?.errors?.['maxlength']">اسم العائلة طويل جدًا</small>
+        <small *ngIf="LastName?.touched && LastName?.errors?.['pattern']">اسم العائلة يجب أن يحتوي على حروف إنجليزية فقط بدون مسافات </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>رقم الهاتف</label>
+      <input class="form-control" placeholder="رقم الهاتف" formControlName="PhoneNumber">
+      <div class="error">
+        <small *ngIf="PhoneNumber?.touched && PhoneNumber?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="PhoneNumber?.touched && PhoneNumber?.errors?.['minlength']">رقم الهاتف قصير جدًا</small>
+        <small *ngIf="PhoneNumber?.touched && PhoneNumber?.errors?.['maxlength']">رقم الهاتف طويل جدًا</small>
+        <small *ngIf="PhoneNumber?.touched && PhoneNumber?.errors?.['pattern']">رقم الهاتف يجب أن يحتوي على أرقام فقط وأقصى عدد 11</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>الرقم القومي</label>
+      <input class="form-control" placeholder="الرقم القومي" formControlName="NationalId">
+      <div class="error">
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['minlength']">الرقم القومي قصير جدًا</small>
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['maxlength']">الرقم القومي طويل جدًا</small>
+        <small *ngIf="NationalId?.touched && NationalId?.errors?.['pattern']">يجب أن يحتوي الرقم القومي على أرقام فقط</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>اسم المستخدم</label>
+      <input class="form-control" placeholder="اسم المستخدم" formControlName="Username">
+      <div class="error">
+        <small *ngIf="Username?.touched && Username?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="Username?.touched && Username?.errors?.['minlength']">اسم المستخدم قصير جدًا</small>
+        <small *ngIf="Username?.touched && Username?.errors?.['maxlength']">اسم المستخدم طويل جدًا</small>
+        <small *ngIf="Username?.touched && Username?.errors?.['pattern']">اسم المستخدم يجب أن يحتوي على حروف وأرقام فقط</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input class="form-control" type="email" placeholder="البريد الإلكتروني" formControlName="Email">
+      <div class="error">
+        <small *ngIf="Email?.touched && Email?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="Email?.touched && Email?.errors?.['email']">صيغة البريد الإلكتروني غير صحيحة</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>كلمة المرور</label>
+      <input class="form-control" type="password" placeholder="كلمة المرور" formControlName="Password">
+      <div class="error">
+        <small *ngIf="Password?.touched && Password?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="Password?.touched && Password?.errors?.['minlength']">كلمة المرور قصيرة جدًا</small>
+        <small *ngIf="Password?.touched && Password?.errors?.['maxlength']">كلمة المرور طويلة جدًا</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>تأكيد كلمة المرور</label>
+      <input class="form-control" type="password" placeholder="تأكيد كلمة المرور" formControlName="ConfirmPassword">
+      <div class="error">
+        <small *ngIf="ConfirmPassword?.touched && ConfirmPassword?.errors?.['required']">هذا الحقل مطلوب</small>
+        <small *ngIf="ConfirmPassword?.touched && reactiveform.errors?.['notMatching']">كلمة المرور غير متطابقة</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="reactiveform.invalid">تسجيل</button>
+  </form>
+</div>

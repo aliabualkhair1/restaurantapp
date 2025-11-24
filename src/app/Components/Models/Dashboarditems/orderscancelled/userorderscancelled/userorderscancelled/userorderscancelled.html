@@ -1,0 +1,48 @@
+<div class="text-center w-100 my-4" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let order of userorders">
+    <div class="card menu-card h-100">
+      
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <strong>تاريخ الطلب:</strong> {{ order.orderDate }}
+        </h5>
+      </div>
+
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>معرّف المستخدم</strong>
+            <span>{{ order.userId }}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>اسم المستخدم</strong>
+            <span>{{ order.username }}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>معرّف الطلب</strong>
+            <span>{{ order.orderId }}</span>
+          </li>
+
+          <li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
+            <strong>السعر الإجمالي</strong>
+            <span>{{ order.totalPrice }}</span>
+          </li>
+
+          <li class="list-group-item order-status-row d-flex justify-content-between align-items-center">
+            <strong>حالة الطلب</strong>
+            <span class="order-status-badge">{{ order.status }}</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
