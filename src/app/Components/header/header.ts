@@ -20,9 +20,12 @@ export class Header {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  @HostListener('document:click')
-  closeMenu() {
-    this.isMenuOpen = false;
+  @HostListener('document:click', ['$event'])
+  closeMenu(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.contant') && !target.closest('.menu')) {
+      this.isMenuOpen = false;
+    }
   }
 
   LogOut() {
