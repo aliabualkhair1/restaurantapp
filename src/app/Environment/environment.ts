@@ -1,4 +1,4 @@
 export const Environment ={
-    BaseURL:"https://localhost:7006/api/",
-    StaticFiles:"https://localhost:7006/"
+    BaseURL:"http://restaurantapplication.runasp.net/api/",
+    StaticFiles:"http://restaurantapplication.runasp.net/"
 }
