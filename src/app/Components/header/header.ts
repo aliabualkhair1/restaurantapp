@@ -28,10 +28,15 @@ export class Header {
     }
   }
 
+  onItemClick() {
+    this.isMenuOpen = false;
+  }
+
   LogOut() {
     localStorage.clear();
     this.roles.setAuthStatus(false);
     this.router.navigate(['home']);
+    this.isMenuOpen = false;
   }
 
   get isAdmin() {
