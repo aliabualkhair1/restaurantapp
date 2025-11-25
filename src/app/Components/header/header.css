@@ -117,8 +117,7 @@ nav {
     .contant {
         position: absolute;
         top: 70px;
-        right: 0;
-        left: auto; 
+        left: 0;
         background: hsl(210, 15%, 10%);
         width: 220px;
         padding: 1rem;
