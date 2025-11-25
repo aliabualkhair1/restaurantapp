@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="logo">مطعم الخير🍽️</h2>
 
-    <button class="menu" id="menu" (click)="toggleMenu(); $event.stopPropagation()">
+    <button class="menu" id="menu" (click)="toggleMenu($event)">
       ☰
     </button>
     
@@ -20,37 +20,29 @@
         <li>
           <button class="btn btn-success btn-block" routerLink="menu">المينيو</button>
         </li>
-
         <li>
           <button class="btn btn-success btn-block" routerLink="gettables">الترابيزات</button>
         </li>
-
-
         <li *ngIf="isAuth">
           <button class="btn btn-success btn-block" routerLink="usercomplaintsandsuggestions">الشكاوى</button>
         </li>
-
         <li *ngIf="isAuth">
           <button class="btn btn-success btn-block" routerLink="order">الطلبات</button>
         </li>
-
         <li *ngIf="isAuth">
           <button class="btn btn-success btn-block" routerLink="reservation">الحجوزات</button>
         </li>
-
-<li *ngIf="isAuth">
-  <button class="btn btn-success btn-block cart-btn" routerLink="cart">
-    <span class="cart-icon">🛒</span>
-  </button>
-</li>
+        <li *ngIf="isAuth">
+          <button class="btn btn-success btn-block cart-btn" routerLink="cart">
+            <span class="cart-icon">🛒</span>
+          </button>
+        </li>
         <li *ngIf="isAuth">
           <button class="btn btn-success btn-block" routerLink="getuserinfo">الملف الشخصى</button>
         </li>
-
         <li *ngIf="isAuth">
           <button class="btn btn-danger btn-block" (click)="LogOut()">تسجيل خروج</button>
         </li>
-
       </ul>
     </div>
   </div>
