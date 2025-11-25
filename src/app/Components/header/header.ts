@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Roles } from '../../Services/roles';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
@@ -14,8 +15,14 @@ export class Header {
 
   constructor(private roles: Roles, private router: Router) {}
 
-  toggleMenu() {
+  toggleMenu(event: Event) {
+    event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  @HostListener('document:click')
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 
   LogOut() {
