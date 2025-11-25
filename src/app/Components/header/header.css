@@ -46,7 +46,7 @@ nav {
 }
 
 .contant ul li {
-    flex: 1 1 auto; /* هذا يجعل كل عنصر يأخذ مساحة متساوية */
+    flex: 1 1 auto;
     text-align: center;
 }
 
@@ -61,7 +61,7 @@ nav {
     transition: 0.3s ease;
     cursor: pointer;
     white-space: nowrap;
-    width: 100%; /* يجعل الزر يشغل كامل مساحة الـ li */
+    width: 100%;
 }
 
 .contant button.getcolor {
@@ -117,7 +117,8 @@ nav {
     .contant {
         position: absolute;
         top: 70px;
-        left: 0;
+        right: 0;
+        left: auto; 
         background: hsl(210, 15%, 10%);
         width: 220px;
         padding: 1rem;
