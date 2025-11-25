@@ -11,3 +11,11 @@ app-root {
   height: 100%;
   display: block;
 }
+@media (max-width: 768px) {
+  .empty-cart {
+    margin: 0 auto;
+    margin-top: 40%;
+    max-width: 90%;
+    padding: 30px 15px;
+  }
+}
