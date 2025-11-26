@@ -132,6 +132,7 @@ export const routes: Routes = [
    { path: 'unavailable', component: Getunavailablemenuitems, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path: 'available/:id', component: Updatequantity, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
     {path:'reservation',component:Reservations, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
+  { path: 'reservations/:date', component: Reservations, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
   { path: 'addreservation/:id', component: AddReservation, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
   { path: 'updatereservation/:id', component: Updatereservation, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] }  },
 { path: 'deletedreservations', component: Getdeletedreservations, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
