@@ -108,6 +108,7 @@ export const routes: Routes = [
 { path: 'reservationscancelled', component: Reservationscancelled, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
 { path: 'reservationscancelled/:userid', component: Userreservationscancelled, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path:'order',component:Userorders, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] }  },
+  { path:'order/:date',component:Userorders, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] }  },
   { path: 'userorderitems/:id', component: UserOrderItems , canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
   { path: 'complaintsandsuggestions', component: Getcomplaintsandsuggestions },
   { path: 'complaintsandsuggestions/:userid', component: Getusercomplaintsandsuggestions },
