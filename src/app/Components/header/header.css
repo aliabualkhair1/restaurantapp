@@ -128,7 +128,7 @@ nav {
         flex-direction: column;
         z-index: 998;
     }
-}
+
     .contant.active {
         display: flex;
     }
