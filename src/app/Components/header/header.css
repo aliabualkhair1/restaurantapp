@@ -113,13 +113,14 @@ nav {
         flex-direction: row;
         align-items: center;
     }
-
     .contant {
-        position: absolute;
+        position: fixed;
         top: 70px;
-        left: 0;
-        background: hsl(210, 15%, 10%);
+        right: 0;
         width: 220px;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+        background: hsl(210, 15%, 10%);
         padding: 1rem;
         border-radius: 0 0 0 12px;
         box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.3);
@@ -127,7 +128,7 @@ nav {
         flex-direction: column;
         z-index: 998;
     }
-    
+}
     .contant.active {
         display: flex;
     }
