@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: hsl(0, 0%, 0%);
+  overflow: hidden;
 }
 
 .login-dark {
