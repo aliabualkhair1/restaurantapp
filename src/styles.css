@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;   
   overflow-y: auto;  
 }
@@ -12,7 +12,6 @@ app-root {
   display: block;
 }
 @media (max-width: 768px) {
-  min-height: 100dvh;  
   .empty-cart {
     margin: 0 auto !important;
     margin-top: 38% !important;
