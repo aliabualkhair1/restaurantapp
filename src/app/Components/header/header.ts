@@ -42,22 +42,22 @@ export class Header {
   }
 
   get isAdmin() {
-    return this.roles.isAdmin();
+    return this.roles.isAdmin;
   }
 
   get isAdminAssistant() {
-    return this.roles.isAdminAssistant();
+    return this.roles.isAdminAssistant;
   }
 
   get isStaff() {
-    return this.roles.isStaff();
+    return this.roles.isStaff;
   }
 
   get isCustomer() {
-    return this.roles.isCustomer();
+    return this.roles.isCustomer;
   }
 
   get isAuth() {
-    return this.roles.IsAuthenticated();
+    return this.roles.isAuthenticated();
   }
 }
