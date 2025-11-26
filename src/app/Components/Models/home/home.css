@@ -155,7 +155,7 @@ a {
     max-width: 1200px;
     margin: 0 auto;
 }
-@media (max-width: 1400px) {
+@media (max-width: 1300px) {
     .menu-container {
         grid-template-columns: repeat(2, 1fr);
     }
