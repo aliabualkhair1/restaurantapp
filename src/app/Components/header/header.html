@@ -14,7 +14,7 @@
         <li>
           <button class="btn btn-success btn-block" routerLink="home" (click)="onItemClick()">الرئيسية</button>
         </li>
-        <li *ngIf="isAdmin || isAdminAssistant">
+        <li *ngIf="isAuth &&(isAdmin || isAdminAssistant)">
           <button class="btn btn-success btn-block" routerLink="dashboard" (click)="onItemClick()">لوحة الأدمن</button>
         </li>
         <li>
