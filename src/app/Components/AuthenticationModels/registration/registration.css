@@ -111,15 +111,21 @@ html, body {
   margin: 0 0 20px 0; 
   font-weight: bold;
 }
- @media (max-width: 480px) {
+@media (max-width: 480px) {
   .login-dark form {
-    flex-wrap: nowrap; 
-    gap: 10px;
+    flex-direction: column;
+    gap: 15px;
   }
-
   .login-dark form .form-group {
-    flex: 1 1 50%; 
-    min-width: 0;
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 100%;
+  }
+  .login-dark .illustration {
+    font-size: 60px;
+  }
+  .login-dark form .btn-primary {
+    width: 100%;
   }
 }
 .alert.success {
