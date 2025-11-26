@@ -37,24 +37,24 @@ export class Reservations {
     return new Date();
   }
 
-  getallreservations() {
-    this.loading = true;
-    this.http.getallreservations().subscribe({
-      next: (res: any[]) => {
-        this.reservations = res.map(r => {
-          const date = r.dateOfReservation;
-          const time = r.endDate;
-          const endDateTime = new Date(`${date}T${time}`);
-          return { ...r, endDateTime };
-        });
-        this.loading = false;
-      },
-      error: (err) => {
-        this.loading = false;
-        this.showMessage(err.error || 'حدث خطأ أثناء جلب الحجوزات', 'error');
-      }
-    });
-  }
+getallreservations() {
+  this.loading = true;
+  this.http.getallreservations().subscribe({
+    next: (res: any[]) => {
+      this.reservations = res.map(r => {
+        const [year, month, day] = r.dateOfReservation.split('-').map(Number);
+        const [hours, minutes, seconds] = r.endDate.split(':').map(Number);
+        const endDateTime = new Date(year, month - 1, day, hours, minutes, seconds);
+        return { ...r, endDateTime };
+      });
+      this.loading = false;
+    },
+    error: (err) => {
+      this.loading = false;
+      this.showMessage(err.error || 'حدث خطأ أثناء جلب الحجوزات', 'error');
+    }
+  });
+}
 
   getreservationbydate(date: Date) {
     this.http.getbyreservationdate(date).subscribe({
