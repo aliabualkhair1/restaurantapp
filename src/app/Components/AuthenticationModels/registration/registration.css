@@ -13,22 +13,21 @@ html, body {
   justify-content: center;
   align-items: center;
   background-color: hsl(0, 4%, 28%);
-  overflow: hidden;
 }
 
 .login-dark form {
   max-width: 600px;
   width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   background-color: #1e2833;
-  padding: 30px;
+  padding: 40px;
   border-radius: 8px;
   color: #fff;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  max-height: 90vh;
-  overflow: hidden;
 }
 
 .login-dark .illustration {
@@ -36,7 +35,7 @@ html, body {
   text-align: center;
   font-size: 80px;
   color: #2980ef;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .login-dark form .form-group {
@@ -59,9 +58,6 @@ html, body {
   background: none;
   border: none;
   border-bottom: 1px solid #434a52;
-  border-radius: 0;
-  box-shadow: none;
-  outline: none;
   color: #fff;
   padding: 8px 0;
   font-size: 14px;
@@ -119,9 +115,7 @@ html, body {
 
 @media (max-width: 480px) {
   .login-dark form {
-    gap: 12px;
-    padding: 20px;
-    max-height: 85vh;
+    gap: 15px;
   }
 
   .login-dark form .form-group {
