@@ -92,7 +92,7 @@ style="margin: 0 auto 20px; text-align: center;">
   </div>
 </div>
 
-<div *ngIf="menu.length==0" class="empty-cart">
+<div *ngIf="filterd.length==0" class="empty-cart">
   <h3>لا يوجد أى مينيو حتى الآن</h3>
   <button *ngIf="isAdmin || isAdminAssistant" (click)="addmenu()">أضف الأن</button>
 </div>
