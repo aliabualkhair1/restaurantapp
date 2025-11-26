@@ -12,7 +12,7 @@ app-root {
   display: block;
 }
 @media (max-width: 768px) {
-
+  min-height: 100dvh;  
   .empty-cart {
     margin: 0 auto !important;
     margin-top: 38% !important;
