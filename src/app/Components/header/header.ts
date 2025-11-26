@@ -12,14 +12,11 @@ import { Roles } from '../../Services/roles';
 })
 export class Header {
   isMenuOpen = false;
-
   constructor(private roles: Roles, private router: Router) {}
-
   toggleMenu(event: Event) {
     event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
   }
-
   @HostListener('document:click', ['$event'])
   closeMenu(event: Event) {
     const target = event.target as HTMLElement;
@@ -27,34 +24,29 @@ export class Header {
       this.isMenuOpen = false;
     }
   }
-
   onItemClick() {
     this.isMenuOpen = false;
   }
-
   LogOut() {
-    localStorage.clear();
+    localStorage.removeItem('access token');
+    localStorage.removeItem('refresh token');
+    localStorage.removeItem('expire date');
     this.roles.setAuthStatus(false);
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
     this.isMenuOpen = false;
   }
-
   get isAdmin() {
-    return this.roles.isAdmin();
+    return this.roles.hasRole('Admin');
   }
-
   get isAdminAssistant() {
-    return this.roles.isAdminAssistant();
+    return this.roles.hasRole('AdminAssistant');
   }
-
   get isStaff() {
-    return this.roles.isStaff();
+    return this.roles.hasRole('Staff');
   }
-
   get isCustomer() {
-    return this.roles.isCustomer();
+    return this.roles.hasRole('Customer');
   }
-
   get isAuth() {
     return this.roles.IsAuthenticated();
   }
