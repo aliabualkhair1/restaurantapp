@@ -72,7 +72,9 @@ export class AddReservation {
     this.http.addreservation(this.reservation).subscribe({
       next: (res: any) => {
         this.showMessage(res, 'success');
+        setTimeout(() => {
         this.router.navigate(['reservation']);
+}, 1000);
       },
       error: (err) => {
         this.showMessage(err.error || 'حدث خطأ أثناء إضافة الحجز', 'error');
