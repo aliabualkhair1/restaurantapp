@@ -116,6 +116,19 @@
     width: 100%;
     padding: 40px 0;
 }
+@media (max-width: 768px) {
+    .user-grid {
+        grid-template-columns: 1fr !important;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .empty-cart {
+        margin-right: 0 !important;
+        margin-top: 20% !important;
+    }
+}
+
 .empty-cart {
   text-align: center;
   padding: 40px 20px;
