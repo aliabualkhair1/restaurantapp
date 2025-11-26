@@ -113,17 +113,21 @@ html, body {
 }
 @media (max-width: 480px) {
   .login-dark form {
-    flex-direction: column;
     gap: 15px;
   }
   .login-dark form .form-group {
+    flex: 1 1 calc(50% - 10px);
+    min-width: calc(50% - 10px);
+  }
+  .login-dark form .form-group.full-width {
     flex: 1 1 100%;
-    width: 100%;
     min-width: 100%;
   }
+
   .login-dark .illustration {
     font-size: 60px;
   }
+
   .login-dark form .btn-primary {
     width: 100%;
   }
