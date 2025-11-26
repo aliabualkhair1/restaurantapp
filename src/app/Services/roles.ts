@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+
 @Injectable({ providedIn: 'root' })
 export class Roles {
 
-  private authStatus = new BehaviorSubject<boolean>(this.IsAuthenticated());
+  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  AuthStatus() {
+  authStatus$() {
     return this.authStatus.asObservable();
   }
 
@@ -14,28 +15,26 @@ export class Roles {
     this.authStatus.next(value);
   }
 
-  gettoken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem('access token');
   }
 
   private isExpired(token: string): boolean {
     try {
       const decoded: any = jwtDecode(token);
-      if (!decoded.exp) return true;
-
-      return Date.now() > decoded.exp * 1000;
+      return !decoded.exp || Date.now() > decoded.exp * 1000;
     } catch {
       return true;
     }
   }
 
-  IsAuthenticated(): boolean {
-    const token = this.gettoken();
+  isAuthenticated(): boolean {
+    const token = this.getToken();
     return token !== null && !this.isExpired(token);
   }
 
-  getrole(): string | null {
-    const token = this.gettoken();
+  getRole(): string | null {
+    const token = this.getToken();
     if (!token || this.isExpired(token)) return null;
 
     try {
@@ -47,21 +46,22 @@ export class Roles {
   }
 
   hasRole(role: string): boolean {
-    return this.getrole() === role;
+    return this.getRole() === role;
   }
-  get isAdmin() {
+
+  isAdmin(): boolean {
     return this.hasRole('Admin');
   }
 
-  get isAdminAssistant() {
+  isAdminAssistant(): boolean {
     return this.hasRole('AdminAssistant');
   }
 
-  get isStaff() {
+  isStaff(): boolean {
     return this.hasRole('Staff');
   }
 
-  get isCustomer() {
+  isCustomer(): boolean {
     return this.hasRole('Customer');
   }
 }
