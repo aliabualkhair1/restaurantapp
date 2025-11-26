@@ -8,7 +8,7 @@ html, body {
 }
 app-root {
   width: 100%;
-  min-height: 100vh;  
+  min-height: 100dvh;  
   display: block;
 }
 @media (max-width: 768px) {
