@@ -42,9 +42,9 @@ export class Reservations {
     this.http.getallreservations().subscribe({
       next: (res: any[]) => {
         this.reservations = res.map(r => {
-          const date = r.dateOfReservation;
-          const time = r.endDate;
-          const endDateTime = new Date(`${date}T${time}`);
+          const [y, m, d] = r.dateOfReservation.split('-').map(Number);
+          const [eh, em, es] = r.endDate.split(':').map(Number);
+          const endDateTime = new Date(y, m - 1, d, eh, em, es);
           return { ...r, endDateTime };
         });
         this.loading = false;
@@ -58,8 +58,13 @@ export class Reservations {
 
   getreservationbydate(date: Date) {
     this.http.getbyreservationdate(date).subscribe({
-      next: (res) => {
-        this.reservations = res;
+      next: (res: any[]) => {
+        this.reservations = res.map(r => {
+          const [y, m, d] = r.dateOfReservation.split('-').map(Number);
+          const [eh, em, es] = r.endDate.split(':').map(Number);
+          const endDateTime = new Date(y, m - 1, d, eh, em, es);
+          return { ...r, endDateTime };
+        });
       },
       error: (err) => {
         this.reservations = [];
