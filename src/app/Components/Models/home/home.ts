@@ -34,7 +34,7 @@ export class Home implements AfterViewInit{
     })
   }
   get isAuth() {
-    return this.role.IsAuthenticated();
+    return this.role.isAuthenticated();
   }
 ngAfterViewInit(): void {
   const reveals = document.querySelectorAll(".reveal");
