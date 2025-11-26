@@ -49,19 +49,11 @@ export class Roles {
     return this.getRole() === role;
   }
 
-  isAdmin(): boolean {
-    return this.hasRole('Admin');
-  }
+  isAdmin = () => this.hasRole('Admin');
 
-  isAdminAssistant(): boolean {
-    return this.hasRole('AdminAssistant');
-  }
+  isAdminAssistant = () => this.hasRole('AdminAssistant');
 
-  isStaff(): boolean {
-    return this.hasRole('Staff');
-  }
+  isStaff = () => this.hasRole('Staff');
 
-  isCustomer(): boolean {
-    return this.hasRole('Customer');
-  }
+  isCustomer = () => this.hasRole('Customer');
 }
