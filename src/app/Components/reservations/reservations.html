@@ -86,7 +86,7 @@
   <button *ngIf="reservation.endDateTime && reservation.endDateTime<now" 
           (click)="addreservationfeedback(reservation.reservationId)" 
           class="btn btn-sm btn-outline-warning flex-fill">
-    <i class="bi bi-pencil-square"></i> إضافة تقييم للحجز
+    <i class="bi bi-pencil-square"></i> إضافة تقييم
   </button>
 
   <button (click)="update(reservation.reservationId)" 
