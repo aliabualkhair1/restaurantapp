@@ -203,9 +203,9 @@
 }
 
 .d-flex.flex-wrap.gap-2 {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .d-flex.flex-wrap.gap-2 > button {
