@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
-
 @Injectable({ providedIn: 'root' })
 export class Roles {
 
@@ -49,5 +48,20 @@ export class Roles {
 
   hasRole(role: string): boolean {
     return this.getrole() === role;
+  }
+  get isAdmin() {
+    return this.hasRole('Admin');
+  }
+
+  get isAdminAssistant() {
+    return this.hasRole('AdminAssistant');
+  }
+
+  get isStaff() {
+    return this.hasRole('Staff');
+  }
+
+  get isCustomer() {
+    return this.hasRole('Customer');
   }
 }
