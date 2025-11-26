@@ -21,7 +21,7 @@ export class Cart implements OnInit {
   constructor(private auth: Roles, private router: Router) {}
 
   ngOnInit(): void {
-    this.isauth = this.auth.IsAuthenticated();
+    this.isauth = this.auth.isAuthenticated();
   }
 
   login() {
