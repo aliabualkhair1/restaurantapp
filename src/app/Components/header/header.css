@@ -113,26 +113,19 @@ nav {
         flex-direction: row;
         align-items: center;
     }
-    .contant {
-        position: fixed;
-        top: 70px;
-        right: 0;
-        width: 220px;
-        height: calc(100vh - 70px);
-        overflow-y: auto;
-        background: hsl(210, 15%, 10%);
-        padding: 1rem;
-        border-radius: 0 0 0 12px;
-        box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.3);
-        display: none; 
-        flex-direction: column;
-        z-index: 998;
-    }
-
+.contant { 
+  position: absolute; 
+  top: 70px; 
+  left: 0; 
+  background: hsl(210, 15%, 10%); 
+  width: 220px;
+  padding: 1rem; 
+  border-radius: 0 0 0 12px;
+  box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.3); display: none; flex-direction: column; z-index: 998; 
+}
     .contant.active {
         display: flex;
     }
-
     .contant ul {
         flex-direction: column;
         gap: 10px;
