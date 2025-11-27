@@ -7,9 +7,11 @@
   <button (click)="add()" class="btn btn-success top-btn">
     <i class="bi bi-arrow-clockwise"></i> إضافة شكوى
   </button>
-  <button (click)="getalldeletedcomplaintsandsuggestions()" class="btn btn-warning top-btn">
-    <i class="bi bi-x-octagon"></i> إسترجاع شكوى محذوفة
-  </button>
+</div>
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedcomplaintsandsuggestions.length > 0">
+<button (click)="getalldeletedcomplaintsandsuggestions()" class="btn btn-warning top-btn">
+  <i class="bi bi-x-octagon"></i> إسترجاع شكوى محذوفة
+</button>
 </div>
 <div class="text-center w-100" *ngIf="loading">
   <app-spinner></app-spinner>
