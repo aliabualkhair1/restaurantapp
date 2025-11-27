@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Spinner } from '../spinner/spinner';
 import { Orderservices } from '../../../Services/orderservices';
 import { _UserOrdersFeedback } from '../../../Interfaces/Models/ordersfeedback';
+import { Ordersstatus } from '../../../Services/SubComponents/ordersstatus';
 
 @Component({
   selector: 'app-reservationsfeedback',
@@ -16,13 +17,19 @@ export class UserOrdersFeedback {
   loading: boolean = false;
   date: any;
   userordersfeedback: _UserOrdersFeedback[] = [];
-
+  deleteduserordersfeedback: _UserOrdersFeedback[] = [];
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Orderservices, private router: ActivatedRoute, private routing: Router) {}
+  constructor(private http: Orderservices, private router: ActivatedRoute, private routing: Router,private oi:Ordersstatus) {}
 
   ngOnInit(): void {
+    this.oi.DeletedOrdersFeedbacks$.subscribe(data=>{
+this.deleteduserordersfeedback=data
+    })
+    this.http.getalldeletedordersfeedback().subscribe(res=>{
+this.oi.setDeletedOrdersFeedbacks(res)
+    })
     this.router.params.subscribe(res => {
       this.date = res['date'];
       if (this.date) {
@@ -71,8 +78,11 @@ export class UserOrdersFeedback {
     this.http.deleteorderfeedback(id).subscribe({
       next: (res) => {
         this.showMessage('تم حذف التقييم بنجاح', 'success');
-        this.loading = false;
         this.getuserordersfeedback();
+        this.http.getalldeletedordersfeedback().subscribe(res=>{
+        this.oi.setDeletedOrdersFeedbacks(res)
+    })
+        this.loading = false;
       },
       error: (err) => {
         this.loading = false;

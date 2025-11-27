@@ -3,7 +3,7 @@
        style="margin: 0 auto 20px; text-align: center;">
       {{ apiMessage }}
       </div>
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="userordersfeedback.length>0">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deleteduserordersfeedback.length>0">
   <button (click)="RestoreDeletedOrdersfeedback()" class="btn btn-success top-btn">
     <i class="bi bi-arrow-clockwise"></i> استعادة تقييمات الطلبات المحذوفة
   </button>
@@ -63,7 +63,7 @@
     </div>
   </div>
 </div>
-<div class="empty-cart" *ngIf="userordersfeedback.length==0" >
+<div class="empty-cart">
   <h3>لا توجد أى تقييمات للطلبات حتى الآن</h3>
   <button (click)="orderfeedback()">قيم الأن</button>
 </div>

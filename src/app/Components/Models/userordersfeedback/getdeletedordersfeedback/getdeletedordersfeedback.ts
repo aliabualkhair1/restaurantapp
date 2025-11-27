@@ -5,6 +5,7 @@ import { _UserOrdersFeedback } from '../../../../Interfaces/Models/ordersfeedbac
 import { Orderservices } from '../../../../Services/orderservices';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinner } from "../../spinner/spinner";
+import { Ordersstatus } from '../../../../Services/SubComponents/ordersstatus';
 
 @Component({
   selector: 'app-getdeletedreservationfeedback',
@@ -20,7 +21,7 @@ export class Getdeletedorderfeedback {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Orderservices, private router: ActivatedRoute, private routing: Router) {}
+  constructor(private http: Orderservices, private router: ActivatedRoute, private routing: Router,private oi:Ordersstatus) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(res => {
@@ -38,6 +39,7 @@ export class Getdeletedorderfeedback {
     this.http.getalldeletedordersfeedback().subscribe({
       next: (res) => {
         this.userordersfeedback = res;
+        this.oi.setDeletedOrdersFeedbacks(res)
         this.loading = false;
       },
       error: (err) => {
