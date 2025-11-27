@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinner } from "../spinner/spinner";
 import { Roles } from '../../../Services/roles';
+import { Menustatus } from '../../../Services/SubComponents/menustatus';
+import { Menuiteminterface } from '../../../Interfaces/Models/menuiteminterface';
+import { Menuitemsstatus } from '../../../Services/SubComponents/menuitemsstatus';
 
 @Component({
   selector: 'app-menu',
@@ -22,16 +25,16 @@ export class Menu implements OnInit {
   name: any;
   currentpage: number = 1;
   totalpages: number = 1;
-
+deletedmenus:Menuinterface[]=[]
+unavailablemenus:Menuinterface[]=[]
   isAdmin = false;
   isAdminAssistant = false;
   isStaff = false;
   isCustomer = false;
-
+  unavailablemenuitems:Menuiteminterface[]=[]
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
-
-  constructor(private http: MenuService, private router: Router, private routing: ActivatedRoute, private auth: Roles) {
+  constructor(private http: MenuService, private router: Router, private routing: ActivatedRoute, private auth: Roles,private menus:Menustatus) {
     this.name = routing.snapshot.paramMap.get('name');
   }
 
@@ -41,14 +44,25 @@ export class Menu implements OnInit {
     this.isAdminAssistant = this.auth.isAdminAssistant();
     this.isStaff = this.auth.isStaff();
     this.isCustomer = this.auth.isCustomer();
-
+ this.menus.UnAvailableMenu$.subscribe(data=>{
+  this.unavailablemenus=data
+})  
+this.menus.DeletedMenu$.subscribe(data=>{
+this.deletedmenus=data
+ })  
+    this.http.getunavailablemenu().subscribe(res => {
+    this.menus.setUnAvailableMenu(res);
+  });
+    this.http.getalldeletedmenu().subscribe(res => {
+    this.menus.setDeletedMenu(res);
+  });
+  
+      if (this.name == null) {
+        this.getmenu();
+      } else {
+        this.getmenubyname(this.name);
+      }
     this.getcategory();
-
-    if (this.name == null) {
-      this.getmenu();
-    } else {
-      this.getmenubyname(this.name);
-    }
   }
 
   getmenu() {
@@ -151,12 +165,14 @@ export class Menu implements OnInit {
   unavailablemenu() {
     this.router.navigate(['unavailablemenu']);
   }
-
   deletemenu(menuid: number) {
     this.http.deletemenu(menuid).subscribe({
       next: (res) => {
         this.showMessage(res, 'success');
         this.getmenu();
+        this.http.getalldeletedmenu().subscribe(deleted => {
+        this.menus.setDeletedMenu(deleted);
+      });
       },
       error: (err) => {
         this.showMessage(err.error || 'حدث خطأ', 'error');

@@ -3,21 +3,23 @@
 style="margin: 0 auto 20px; text-align: center;">
 {{ apiMessage }}
 </div>
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && filterd.length>0">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && menu.length>0">
    <button (click)="addmenu()" class="btn btn-primary top-btn">
     <i class="bi bi-x-octagon"></i> إضافة مينيو
   </button>
-  <button (click)="restoremenu()" class="btn btn-success top-btn">
-    <i class="bi bi-arrow-clockwise"></i> استعادة مينيو محذوف
-  </button>
 </div>
-<div class="top-buttons-container d-grid gap-3 mb-4"*ngIf="(isAdmin || isAdminAssistant)">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) &&unavailablemenus.length>0">
   <button (click)="unavailablemenu()" class="btn btn-warning top-btn" >
     <i class="bi bi-x-octagon"></i>  مينيو غير متاح 
   </button>
 </div>
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && deletedmenus.length>0">
+<button (click)="restoremenu()" class="btn btn-success top-btn">
+  <i class="bi bi-arrow-clockwise"></i> استعادة مينيو محذوف
+</button>
+</div>
 
-<div class="row mb-4 align-items-end" *ngIf="filterd.length>0">
+<div class="row mb-4 align-items-end" *ngIf="menu.length>0">
   <div class="col-md-4 mb-3">
     <label for="item" class="form-label fw-bold">الفئات</label>
     <select id="item" class="form-select" (change)="getmenubycategory($event)">
@@ -26,7 +28,7 @@ style="margin: 0 auto 20px; text-align: center;">
     </select>
   </div>
   
-  <div class="col-md-8 mb-3" *ngIf="filterd.length>0">
+  <div class="col-md-8 mb-3" *ngIf="menu.length>0">
     <div class="search-container">
       <div class="search-box">
         <input [(ngModel)]="name" placeholder="ابحث باسم القائمة..." type="text">
@@ -85,14 +87,14 @@ style="margin: 0 auto 20px; text-align: center;">
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="filterd.length>0">
+  <div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="menu.length>0">
     <button class="btn btn-outline-secondary" (click)="prevPage()" [disabled]="currentpage === 1">السابق</button>
     <span class="fw-bold">الصفحة {{currentpage}} من {{totalpages}}</span>
     <button class="btn btn-outline-secondary" (click)="nextPage()" [disabled]="currentpage === totalpages">التالي</button>
   </div>
 </div>
 
-<div *ngIf="filterd.length==0" class="empty-cart">
+<div *ngIf="menu.length==0" class="empty-cart">
   <h3>لا يوجد أى مينيو حتى الآن</h3>
   <button *ngIf="isAdmin || isAdminAssistant" (click)="addmenu()">أضف الأن</button>
 </div>

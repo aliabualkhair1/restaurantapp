@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MenuService } from "../../../../Services/menuservice";
 import { Menuinterface } from "../../../../Interfaces/Models/menuinterface";
 import { FormsModule } from "@angular/forms";
+import { Menustatus } from "../../../../Services/SubComponents/menustatus";
 
 @Component({
   selector: 'app-returnunavailablemenu',
@@ -20,7 +21,7 @@ export class Returnunavailablemenu implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: MenuService, private routing: ActivatedRoute, private router: Router) {
+  constructor(private http: MenuService, private routing: ActivatedRoute, private router: Router,private menu:Menustatus) {
     this.name = routing.snapshot.paramMap.get('name');
   }
 
@@ -37,6 +38,7 @@ export class Returnunavailablemenu implements OnInit {
     this.http.getunavailablemenu().subscribe({
       next: (res) => {
         this.menus = res;
+        this.menu.setUnAvailableMenu(res)
         this.loading = false;
       },
       error: (err) => {

@@ -5,6 +5,7 @@ import { Menuinterface } from "../../../../Interfaces/Models/menuinterface";
 import { MenuService } from "../../../../Services/menuservice";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { Menustatus } from "../../../../Services/SubComponents/menustatus";
 
 @Component({
   selector: 'app-restoremenu',
@@ -20,7 +21,7 @@ export class Restoremenu implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: MenuService, private routing: ActivatedRoute, private router: Router) {
+  constructor(private http: MenuService, private routing: ActivatedRoute, private router: Router,private menu:Menustatus) {
     this.name = routing.snapshot.paramMap.get('name');
   }
 
@@ -37,6 +38,7 @@ export class Restoremenu implements OnInit {
     this.http.getalldeletedmenu().subscribe({
       next: (res) => {
         this.menus = res;
+        this.menu.setDeletedMenu(res)
         this.loading = false;
       },
       error: (err) => {
