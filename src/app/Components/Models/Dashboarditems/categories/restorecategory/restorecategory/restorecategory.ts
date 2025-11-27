@@ -54,7 +54,6 @@ export class Restorecategory implements OnInit {
         this.showMessage(res, 'success')
             this.loading = false
         setTimeout(() => {
-          this.router.navigate(['/restoredeletedcategories'])
           this.getdeletedcategories()
         }, 1000)
       },
@@ -66,7 +65,6 @@ export class Restorecategory implements OnInit {
   }
 
   restorecategorybyid(id: number) {
-    this.router.navigate(['restoredeletedcategories/restore', id])
     this.restorecategory(id)
   }
 
