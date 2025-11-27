@@ -27,7 +27,6 @@ export class Updatemenu implements OnInit {
       CategoryId: new FormControl(null, [Validators.pattern('^[0-9]+$')]),
       MenuName: new FormControl(null, [Validators.pattern("^[a-zA-Z\u0621-\u064A ]+$")]),
       Description: new FormControl(null, [Validators.pattern("^[a-zA-Z\u0621-\u064A ]+$")]),
-      IsAvailable: new FormControl(true)
     });
   }
 
@@ -38,7 +37,6 @@ export class Updatemenu implements OnInit {
   get CategoryId() { return this.reactiveform.get('CategoryId'); }
   get MenuName() { return this.reactiveform.get('MenuName'); }
   get Description() { return this.reactiveform.get('Description'); }
-  get IsAvailable() { return this.reactiveform.get('IsAvailable'); }
 
   getcategory() {
     this.http.getallcategories().subscribe({
@@ -58,8 +56,7 @@ export class Updatemenu implements OnInit {
     this.menu = {
       categoryId: this.value,
       menuName: this.reactiveform.value.MenuName,
-      description: this.reactiveform.value.Description,
-      isAvailable: this.reactiveform.value.IsAvailable
+      description: this.reactiveform.value.Description
     };
 
     const correctvalues = Object.fromEntries(
