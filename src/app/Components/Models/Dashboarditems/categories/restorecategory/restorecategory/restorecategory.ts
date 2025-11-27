@@ -5,6 +5,7 @@ import { Categoryinterface } from "../../../../../../Interfaces/Models/categoryi
 import { CategoryServices } from "../../../../../../Services/category-services"
 import { ActivatedRoute, Router } from "@angular/router"
 import { FormsModule } from "@angular/forms"
+import { Categorystatus } from "../../../../../../Services/SubComponents/categorystatus"
 
 @Component({
   selector: 'app-restorecategory',
@@ -19,7 +20,7 @@ export class Restorecategory implements OnInit {
   apiMessage: string = ''
   apiMessageType: 'success' | 'error' = 'success'
 
-  constructor(private http: CategoryServices, private routing: ActivatedRoute, private router: Router) {
+  constructor(private http: CategoryServices, private routing: ActivatedRoute, private router: Router,private category:Categorystatus) {
     this.name = routing.snapshot.paramMap.get('name')
   }
 
@@ -36,6 +37,7 @@ export class Restorecategory implements OnInit {
     this.http.getalldeletedcategories().subscribe({
       next: (res) => {
         this.categories = res
+        this.category.setDeletedCategories(res)
         this.loading = false
       },
       error: (err) => {

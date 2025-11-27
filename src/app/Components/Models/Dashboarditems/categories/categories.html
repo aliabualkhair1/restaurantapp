@@ -13,9 +13,10 @@
 
 <div class="action-buttons-vertical" *ngIf="categories.length>0">
   <button class="btn btn-success" (click)="addcategory()">إضافة فئة</button>
+</div>
+<div class="action-buttons-vertical" *ngIf="deletedcategories.length>0">
   <button class="btn btn-warning" (click)="restoredeletedcategories()">إسترجاع الفئات المحذوفة</button>
 </div>
-
 <div class="text-center w-100" *ngIf="loading">
   <app-spinner></app-spinner>
 </div>

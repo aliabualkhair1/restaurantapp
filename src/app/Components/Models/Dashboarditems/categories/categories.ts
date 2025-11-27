@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../../../Services/menuservice';
 import { Addmenu } from './addmenu/addmenu';
+import { Categorystatus } from '../../../../Services/SubComponents/categorystatus';
 
 @Component({
   selector: 'app-categories',
@@ -17,7 +18,7 @@ import { Addmenu } from './addmenu/addmenu';
 export class Categories implements OnInit {
   loading: boolean = false;
   categories: Categoryinterface[] = [];
-  addmenu!: Addmenu;
+  deletedcategories: Categoryinterface[] = [];
   name: any;
 
   apiMessage: string = '';
@@ -27,12 +28,18 @@ export class Categories implements OnInit {
     private http: CategoryServices,
     private routing: ActivatedRoute,
     private router: Router,
-    private menu: MenuService
+    private delcategory:Categorystatus
   ) {
     this.name = this.routing.snapshot.paramMap.get('name');
   }
 
   ngOnInit(): void {
+    this.delcategory.deletedCategories$.subscribe(data=>{
+      this.deletedcategories=data
+    })
+    this.http.getalldeletedcategories().subscribe(res=>{
+    this.delcategory.setDeletedCategories(res)
+    })
     if (this.name == null) {
       this.getallcategories();
     } else {
@@ -60,6 +67,9 @@ export class Categories implements OnInit {
       next: (res) => {
         this.showMessage(res, 'success');
         this.getallcategories();
+            this.http.getalldeletedcategories().subscribe(res=>{
+            this.delcategory.setDeletedCategories(res)
+    })
         this.loading = false;
       },
       error: (err) => {
