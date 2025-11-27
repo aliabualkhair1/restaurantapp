@@ -87,7 +87,6 @@ export class Categories implements OnInit {
   }
 
   deletedcategorybyid(id: number) {
-    this.router.navigate(['categories/', id]);
     this.deletecategory(id);
   }
 
