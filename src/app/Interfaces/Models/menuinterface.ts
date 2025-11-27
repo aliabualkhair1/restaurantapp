@@ -34,7 +34,6 @@ export interface UpdateMenu{
     categoryId:number,
     menuName:string
     description:string,
-    isAvailable:boolean
 }
 export interface checkid{
 id:number
