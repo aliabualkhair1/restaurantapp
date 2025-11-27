@@ -16,13 +16,21 @@ export class Reservations {
   loading: boolean = false;
   reservations: UserReservations[] = [];
   date: any;
+deletedreservation:UserReservations[]=[]
 
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute) {}
+  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute,deletedreservation:UserReservations[]=[]
+) {}
 
   ngOnInit(): void {
+        this.res.deletedReservations$.subscribe(data=>{
+  this.deletedreservation=data
+    })  
+      this.http.getalldeletedreservations().subscribe(res => {
+    this.res.setDeletedReservations(res);
+  });
     this.router.params.subscribe(res => {
       this.date = res['date'];
       if (this.date) {
@@ -87,6 +95,9 @@ export class Reservations {
       next: (res) => {
         this.showMessage(res, 'success');
         this.getallreservations();
+         this.http.getalldeletedreservations().subscribe(deleted => {
+        this.res.setDeletedReservations(deleted);
+      });
         this.loading = false;
       },
       error: (err) => {
