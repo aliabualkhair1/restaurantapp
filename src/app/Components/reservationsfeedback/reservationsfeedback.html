@@ -4,11 +4,12 @@
       {{ apiMessage }}
       </div>
 
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="userreservationsfeedback.length>0">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deleteduserreservationsfeedback.length>0">
     <button (click)="RestoreDeletedReservationsfeedback()" class="btn btn-success top-btn">
         <i class="bi bi-arrow-clockwise"></i> إسترجاع تقييمات الحجوزات المحذوفة
     </button>
 </div>
+
 
 <div class="search-section w-100 mb-4" *ngIf="userreservationsfeedback.length>0">
     <div class="container-fluid">
