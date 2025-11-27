@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Spinner } from '../Models/spinner/spinner';
 import { ReserationServices } from '../../Services/reseration-services';
 import { FormsModule } from '@angular/forms';
-
+import { ReservationStatus } from '../../Services/SubComponents/reservation-status';
 @Component({
   selector: 'app-reservations',
   imports: [CommonModule, Spinner, FormsModule],
