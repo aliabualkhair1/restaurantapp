@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap gap-2 justify-content-end">
+<div class="d-flex flex-wrap gap-2 justify-content-end" *ngIf="!isPaid">
   <button *ngIf="!appear" class="btn btn-sm btn-outline-primary flex-grow-1 update-hover-btn" (click)="appear=true">
       <i class="bi bi-pencil"></i> تحديث
   </button>
