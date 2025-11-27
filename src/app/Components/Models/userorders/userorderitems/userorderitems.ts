@@ -22,6 +22,7 @@ export class UserOrderItems implements OnInit {
   deletedorderitem: Orderitem[] = [];
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
+  orderstatus!:boolean
 
   constructor(private http: Orderservices, private routing: ActivatedRoute, private router: Router,private oi:Ordersstatus) {
     this.id = this.routing.snapshot.paramMap.get('id');
@@ -43,6 +44,7 @@ this.oi.setDeletedOrderItems(res)
       next: (res: Order[] | any) => {
         if (res && res.length > 0) {
           this.orderitem = res[0].orderItems;
+          this.orderstatus=res[0].isPaid
         } else {
           this.orderitem = [];
         }
