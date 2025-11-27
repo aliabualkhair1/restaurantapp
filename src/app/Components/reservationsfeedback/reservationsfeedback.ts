@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Spinner } from "../Models/spinner/spinner";
 import { FormsModule } from '@angular/forms';
-
+import { ReservationStatus } from '../../Services/SubComponents/reservation-status';
 @Component({
   selector: 'app-reservationsfeedback',
   imports: [CommonModule, Spinner, FormsModule],
@@ -16,13 +16,19 @@ export class _Reservationsfeedback {
   loading: boolean = false;
   date: any;
   userreservationsfeedback: UserReservationFeedback[] = [];
-
+  deleteduserreservationsfeedback:UserReservationFeedback[]=[]
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router) {}
+  constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router,private res:ReservationStatus) {}
 
   ngOnInit(): void {
+      this.res.DeletedReservationsFeedbacks$.subscribe(data=>{
+  this.deleteduserreservationsfeedback=data
+  })
+    this.http.getalldeletedreservationsfeedback().subscribe(res => {
+    this.res.setDeletedReservationsFeedbacks(res);
+  })
     this.router.params.subscribe(res => {
       this.date = res['date'];
       if (this.date) {
@@ -71,8 +77,11 @@ export class _Reservationsfeedback {
     this.http.deletereservationfeedback(id).subscribe({
       next: (res) => {
         this.showMessage(res, 'success');
-        this.loading = false;
         this.getuserreservationsfeedback();
+        this.http.getalldeletedreservationsfeedback().subscribe(deleted => {
+        this.res.setDeletedReservationsFeedbacks(deleted);
+      })
+        this.loading = false;
       },
       error: (err) => {
         this.loading = false;
