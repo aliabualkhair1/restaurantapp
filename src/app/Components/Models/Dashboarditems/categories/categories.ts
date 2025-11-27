@@ -108,7 +108,7 @@ export class Categories implements OnInit {
   search(name: string) {
     const trimmedName = this.name.trim();
     if (trimmedName !== '') {
-      this.router.navigate(['categories/search', trimmedName]);
+      this.router.navigate(['categories', trimmedName]);
       this.getcategorybyname(trimmedName);
     } else {
       this.router.navigate(['categories']);
