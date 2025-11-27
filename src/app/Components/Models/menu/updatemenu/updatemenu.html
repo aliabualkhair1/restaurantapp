@@ -46,21 +46,6 @@
           <small *ngIf="Description?.errors?.['pattern']">غير مسموح بالرموز</small>
         </div>
       </div>
-
-      <div class="form-group">
-        <div class="form-check">
-          <input
-            id="menuStatus"
-            type="checkbox"
-            class="form-check-input"
-            formControlName="IsAvailable"
-          />
-          <label class="form-check-label" for="menuStatus">
-            توافر القائمة
-          </label>
-        </div>
-      </div>
-
       <button type="submit" class="btn-submit">تحديث القائمة</button>
 
     </form>
