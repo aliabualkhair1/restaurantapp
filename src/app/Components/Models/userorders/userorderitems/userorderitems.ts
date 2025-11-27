@@ -45,6 +45,7 @@ this.oi.setDeletedOrderItems(res)
         if (res && res.length > 0) {
           this.orderitem = res[0].orderItems;
           this.orderstatus=res[0].isPaid
+          console.log("ISPAID ::: ", res[0].isPaid, typeof res[0].isPaid);
         } else {
           this.orderitem = [];
         }
