@@ -59,15 +59,11 @@ export class Updatemenu implements OnInit {
       description: this.reactiveform.value.Description
     };
 
-    const correctvalues = Object.fromEntries(
-      Object.entries(this.menu).map(([key, value]) => [key, value === '' ? null : value])
-    );
-
-    this.updatemenubymenuid(correctvalues);
+    this.updatemenubymenuid();
   }
 
-  updatemenubymenuid(correctvalues: any) {
-    this.http.updatemenu(correctvalues, this.id).subscribe({
+  updatemenubymenuid() {
+    this.http.updatemenu(this.menu, this.id).subscribe({
       next: (res) => {
         this.apiMessage = res;
         this.apiMessageType = 'success';
