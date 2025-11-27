@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { showComplaintsAndSuggestions } from "../../../../Interfaces/Models/complaintsandsuggestions";
 import { Complaintandsuggestionservice } from "../../../../Services/complaintandsuggestionservice";
 import { Router } from "@angular/router";
+import { Complaintsandsuggestionsstatus } from "../../../../Services/SubComponents/complaintsandsuggestionsstatus";
 
 @Component({
   selector: 'app-deletedcomplaintsandsuggestions',
@@ -18,7 +19,7 @@ export class Deletedcomplaintsandsuggestions implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: Complaintandsuggestionservice, private router: Router) {}
+  constructor(private http: Complaintandsuggestionservice, private router: Router,private compandsugg:Complaintsandsuggestionsstatus) {}
 
   ngOnInit(): void {
     this.getalldeletedcomplaintsandsuggestions();
@@ -29,6 +30,7 @@ export class Deletedcomplaintsandsuggestions implements OnInit {
     this.http.getdeletedcomplaintsandsuggestions().subscribe({
       next: (res) => {
         this.complaintsandsuggestions = res;
+        this.compandsugg.setDeletedComplaintsAndSuggestions(res)
         this.loading = false;
       },
       error: (err) => {
