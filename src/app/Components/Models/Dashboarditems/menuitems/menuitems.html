@@ -4,10 +4,12 @@
       {{ apiMessage }}
       </div>
 
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="menuitems.length>0">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedmenuitems.length>0">
   <button (click)="getdeletedmenuitems()" class="btn btn-success top-btn">
     <i class="bi bi-arrow-clockwise"></i> استرجاع عنصر قائمة
   </button>
+  </div>
+  <div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="unavailablemenuitems.length>0">
   <button (click)="unavailable()" class="btn btn-warning top-btn">
     <i class="bi bi-x-octagon"></i> العناصر غير المتاحة
   </button>

@@ -6,6 +6,7 @@ import { Spinner } from "../../../spinner/spinner";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Environment } from "../../../../../Environment/environment";
+import { Menuitemsstatus } from "../../../../../Services/SubComponents/menuitemsstatus";
 
 @Component({
   selector: 'app-restoredeletemenuitems',
@@ -34,7 +35,8 @@ export class Restoredeletemenuitems implements OnInit {
   constructor(
     private menuService: Menuitemsservice,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private menuitem:Menuitemsstatus
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class Restoredeletemenuitems implements OnInit {
     this.menuService.getalldeletedmenuitems(this.currentpage).subscribe({
       next: (res) => {
         this.menuitems = res.items;
+        this.menuitem.setDeletedMenuItems(res.items)
         this.loading = false;
       },
       error: (err) => {

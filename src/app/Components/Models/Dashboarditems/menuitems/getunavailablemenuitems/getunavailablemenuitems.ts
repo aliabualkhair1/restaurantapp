@@ -6,6 +6,7 @@ import { Spinner } from "../../../spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Environment } from '../../../../../Environment/environment';
+import { Menuitemsstatus } from '../../../../../Services/SubComponents/menuitemsstatus';
 
 @Component({
   selector: 'app-getunavailablemenuitems',
@@ -28,7 +29,8 @@ export class Getunavailablemenuitems implements OnInit {
   constructor(
     private http: Menuitemsservice,
     private routing: Router,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private menuitem:Menuitemsstatus
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class Getunavailablemenuitems implements OnInit {
     this.http.getunavailablemenuitems(pagenumber).subscribe({
       next: (res) => {
         this.menuitems = res.items;
+        this.menuitem.setUnAvailableMenuItems(res.items)
         this.currentpage = res.pageNumber;
         this.totalpages = res.totalPages;
         this.loading = false;

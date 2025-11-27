@@ -6,6 +6,7 @@ import { Menuiteminterface } from "../../../../Interfaces/Models/menuiteminterfa
 import { Menuitemsservice } from "../../../../Services/menuitemsservice";
 import { FormsModule } from "@angular/forms";
 import { Environment } from "../../../../Environment/environment";
+import { Menuitemsstatus } from "../../../../Services/SubComponents/menuitemsstatus";
 
 @Component({
   selector: 'app-menuitems',
@@ -26,13 +27,26 @@ export class AllMenuitems implements OnInit {
   price?: number;
 
   menuitems: Menuiteminterface[] = [];
-
+  unavailablemenuitems: Menuiteminterface[] = [];
+  deletedmenuitems: Menuiteminterface[] = [];
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: Menuitemsservice, private router: Router) {}
+  constructor(private http: Menuitemsservice, private router: Router,private menuitem:Menuitemsstatus) {}
 
   ngOnInit(): void {
+     this.menuitem.UnAvailableMenuItems$.subscribe(data=>{
+  this.unavailablemenuitems=data
+    })  
+    this.menuitem.DeletedMenuItems$.subscribe(data=>{
+   this.deletedmenuitems=data
+     })  
+      this.http.getunavailablemenuitems(this.currentpage).subscribe(res => {
+    this.menuitem.setUnAvailableMenuItems(res.items);
+  });
+    this.http.getalldeletedmenuitems(this.currentpage).subscribe(res => {
+    this.menuitem.setDeletedMenuItems(res.items);
+  });
     this.getmenuitems(this.currentpage);  
   }
 
@@ -76,6 +90,9 @@ export class AllMenuitems implements OnInit {
       next: (res) => {
         this.showMessage(res, 'success');
         this.getmenuitems(this.currentpage);
+         this.http.getalldeletedmenuitems(this.currentpage).subscribe(res => {
+    this.menuitem.setDeletedMenuItems(res.items);
+         })
         this.loading = false;
       },
       error: (err) => {

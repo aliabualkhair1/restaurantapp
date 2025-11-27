@@ -43,7 +43,6 @@ export class Updatemenuitem {
     if (this.formgroup.invalid) return;
 
     const formData = new FormData();
-    formData.append('MenuId', this.id);
     formData.append('ItemName', this.formgroup.value.ItemName);
     formData.append('Quantity', this.formgroup.value.Quantity);
     formData.append('Price', this.formgroup.value.Price);
