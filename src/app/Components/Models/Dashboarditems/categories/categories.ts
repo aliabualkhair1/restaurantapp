@@ -78,21 +78,6 @@ export class Categories implements OnInit {
       }
     });
   }
-
-  restorecategory(id: number) {
-    this.loading = true;
-    this.http.restorecategorybyid(id).subscribe({
-      next: (res) => {
-        this.showMessage(res, 'success');
-        this.loading = false;
-      },
-      error: (err) => {
-        this.showMessage(err.error, 'error');
-        this.loading = false;
-      }
-    });
-  }
-
   addcategory() {
     this.router.navigate(['addcategory']);
   }
