@@ -6,6 +6,7 @@ import { ReserationServices } from '../../../Services/reseration-services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinner } from "../../Models/spinner/spinner";
 import { ReservationStatus } from '../../../Services/SubComponents/reservation-status';
+
 @Component({
   selector: 'app-getdeletedreservationfeedback',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, Spinner],
@@ -20,8 +21,7 @@ export class Getdeletedreservationfeedback {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router,private res:ReservationStatus) {}
-
+constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router,private res:ReservationStatus){}
   ngOnInit(): void {
     this.router.params.subscribe(res => {
       this.date = res['date'];
@@ -32,7 +32,6 @@ export class Getdeletedreservationfeedback {
       }
     });
   }
-
   getdeleteduserreservationsfeedback() {
     this.loading = true;
     this.http.getalldeletedreservationsfeedback().subscribe({
@@ -47,7 +46,6 @@ export class Getdeletedreservationfeedback {
       }
     });
   }
-
   getdeletedreservationfeedbackbydate(date: Date) {
     this.http.getdeletedbyreservationfeedbackdate(date).subscribe({
       next: (res) => {
@@ -58,7 +56,6 @@ export class Getdeletedreservationfeedback {
       }
     });
   }
-
   search(date: Date) {
     if (date) {
       this.routing.navigate(['deletedreservationsfeedback', date]);

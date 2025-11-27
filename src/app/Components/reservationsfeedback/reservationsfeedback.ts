@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Spinner } from "../Models/spinner/spinner";
 import { FormsModule } from '@angular/forms';
 import { ReservationStatus } from '../../Services/SubComponents/reservation-status';
+
 @Component({
   selector: 'app-reservationsfeedback',
   imports: [CommonModule, Spinner, FormsModule],
@@ -21,9 +22,8 @@ export class _Reservationsfeedback {
   apiMessageType: 'success' | 'error' | '' = '';
 
   constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router,private res:ReservationStatus) {}
-
-  ngOnInit(): void {
-      this.res.DeletedReservationsFeedbacks$.subscribe(data=>{
+ngOnInit(): void {
+  this.res.DeletedReservationsFeedbacks$.subscribe(data=>{
   this.deleteduserreservationsfeedback=data
   })
     this.http.getalldeletedreservationsfeedback().subscribe(res => {
@@ -38,7 +38,6 @@ export class _Reservationsfeedback {
       }
     });
   }
-
   getuserreservationsfeedback() {
     this.loading = true;
     this.http.getallreservationsfeedback().subscribe({
@@ -52,7 +51,6 @@ export class _Reservationsfeedback {
       }
     });
   }
-
   getreservationfeedbackbydate(date: Date) {
     this.http.getbyreservationfeedbackdate(date).subscribe({
       next: (res) => {
@@ -63,7 +61,6 @@ export class _Reservationsfeedback {
       }
     });
   }
-
   search(date: Date) {
     if (date) {
       this.routing.navigate(['getreservationsfeedback', date]);
@@ -71,7 +68,6 @@ export class _Reservationsfeedback {
       this.routing.navigate(['getreservationsfeedback']);
     }
   }
-
   deletereservationsfeedback(id: number) {
     this.loading = true;
     this.http.deletereservationfeedback(id).subscribe({
@@ -81,7 +77,7 @@ export class _Reservationsfeedback {
         this.http.getalldeletedreservationsfeedback().subscribe(deleted => {
         this.res.setDeletedReservationsFeedbacks(deleted);
       })
-        this.loading = false;
+      this.loading = false;
       },
       error: (err) => {
         this.loading = false;
@@ -89,23 +85,18 @@ export class _Reservationsfeedback {
       }
     });
   }
-
   update(id: number) {
     this.routing.navigate(['updatereservationfeedback', id]);
   }
-
   delete(id: number) {
     this.deletereservationsfeedback(id);
   }
-
   RestoreDeletedReservationsfeedback() {
     this.routing.navigate(['deletedreservationsfeedback']);
   }
-
   addreservationfeedback() {
     this.routing.navigate(['reservation']);
   }
-
   private showMessage(message: string, type: 'success' | 'error') {
     this.apiMessage = message;
     this.apiMessageType = type;

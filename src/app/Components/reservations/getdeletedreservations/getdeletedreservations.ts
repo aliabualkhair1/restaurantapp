@@ -6,6 +6,7 @@ import { Spinner } from "../../Models/spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReservationStatus } from '../../../Services/SubComponents/reservation-status';
+
 @Component({
   selector: 'app-getdeletedreservations',
   imports: [Spinner, CommonModule, FormsModule],

@@ -6,6 +6,7 @@ import { Spinner } from '../Models/spinner/spinner';
 import { ReserationServices } from '../../Services/reseration-services';
 import { FormsModule } from '@angular/forms';
 import { ReservationStatus } from '../../Services/SubComponents/reservation-status';
+
 @Component({
   selector: 'app-reservations',
   imports: [CommonModule, Spinner, FormsModule],
@@ -17,15 +18,13 @@ export class Reservations {
   reservations: UserReservations[] = [];
   date: any;
 deletedreservation:UserReservations[]=[]
-
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute,deletedreservation:UserReservations[]=[]
-) {}
+  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute,private res:ReservationStatus) {}
 
   ngOnInit(): void {
-        this.res.deletedReservations$.subscribe(data=>{
+    this.res.deletedReservations$.subscribe(data=>{
   this.deletedreservation=data
     })  
       this.http.getalldeletedreservations().subscribe(res => {
@@ -39,20 +38,18 @@ deletedreservation:UserReservations[]=[]
         this.getallreservations();
       }
     });
-  }
-
+}
   get now(): Date {
     return new Date();
   }
-
   getallreservations() {
     this.loading = true;
     this.http.getallreservations().subscribe({
       next: (res: any[]) => {
         this.reservations = res.map(r => {
-          const [y, m, d] = r.dateOfReservation.split('-').map(Number);
-          const [eh, em, es] = r.endDate.split(':').map(Number);
-          const endDateTime = new Date(y, m - 1, d, eh, em, es);
+          const date = r.dateOfReservation;
+          const time = r.endDate;
+          const endDateTime = new Date(`${date}T${time}`);
           return { ...r, endDateTime };
         });
         this.loading = false;
@@ -63,16 +60,10 @@ deletedreservation:UserReservations[]=[]
       }
     });
   }
-
   getreservationbydate(date: Date) {
     this.http.getbyreservationdate(date).subscribe({
-      next: (res: any[]) => {
-        this.reservations = res.map(r => {
-          const [y, m, d] = r.dateOfReservation.split('-').map(Number);
-          const [eh, em, es] = r.endDate.split(':').map(Number);
-          const endDateTime = new Date(y, m - 1, d, eh, em, es);
-          return { ...r, endDateTime };
-        });
+      next: (res) => {
+        this.reservations = res;
       },
       error: (err) => {
         this.reservations = [];
@@ -95,7 +86,7 @@ deletedreservation:UserReservations[]=[]
       next: (res) => {
         this.showMessage(res, 'success');
         this.getallreservations();
-         this.http.getalldeletedreservations().subscribe(deleted => {
+        this.http.getalldeletedreservations().subscribe(deleted => {
         this.res.setDeletedReservations(deleted);
       });
         this.loading = false;

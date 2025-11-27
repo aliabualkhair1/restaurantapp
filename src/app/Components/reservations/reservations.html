@@ -47,11 +47,11 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <strong>تاريخ البدء:</strong>
-        <span>{{ ('1970-01-01T' + reservation.startDate) | date:'hh:mm a' }}</span>
+        <span>{{ '2005-06-22T' + reservation.startDate | date:'hh:mm a' }}</span>
           </li>
           <li class="list-group-item">
             <strong>تاريخ الانتهاء:</strong>
-        <span>{{ ('1970-01-01T' + reservation.endDate) | date:'hh:mm a' }}</span>
+        <span>{{ '2005-06-22T' + reservation.endDate | date:'hh:mm a' }}</span>
           </li>
           <li class="list-group-item">
             <strong>عدد الضيوف:</strong>
@@ -87,7 +87,7 @@
   <button *ngIf="reservation.endDateTime && reservation.endDateTime<now" 
           (click)="addreservationfeedback(reservation.reservationId)" 
           class="btn btn-sm btn-outline-warning flex-fill">
-    <i class="bi bi-pencil-square"></i> إضافة تقييم
+    <i class="bi bi-pencil-square"></i> إضافة تقييم للحجز
   </button>
 
   <button (click)="update(reservation.reservationId)" 
