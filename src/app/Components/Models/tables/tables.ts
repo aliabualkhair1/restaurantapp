@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Environment } from '../../../Environment/environment';
 import { Roles } from '../../../Services/roles';
+import { Tablesstatus } from '../../../Services/SubComponents/tablesstatus';
 
 @Component({
   selector: 'app-tables',
@@ -18,6 +19,7 @@ export class Tables implements OnInit {
   environment = Environment.StaticFiles;
   loading: boolean = false;
   table: TableInterface[] = [];
+  deletedtables: TableInterface[] = [];
   tablenumber: any;
   currentpage: number = 1;
   totalpages: number = 1;
@@ -30,14 +32,19 @@ export class Tables implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Tablesservices, private router: Router, private routing: ActivatedRoute, private auth: Roles) {}
+  constructor(private http: Tablesservices, private router: Router, private routing: ActivatedRoute, private auth: Roles,private tablestatus:Tablesstatus) {}
 
   ngOnInit(): void {
     this.isAdmin = this.auth.isAdmin();
     this.isAdminAssistant = this.auth.isAdminAssistant();
     this.isStaff = this.auth.isStaff();
     this.isCustomer = this.auth.isCustomer();
-
+    this.tablestatus.deletedtables$.subscribe(data=>{
+    this.deletedtables=data
+    })
+    this.http.getalldeletedtables().subscribe(res=>{
+      this.tablestatus.setDeletedTables(res)
+    })
     this.routing.params.subscribe(params => {
       this.tablenumber = params['tablenumber'];
       if (this.tablenumber) {
@@ -93,6 +100,9 @@ export class Tables implements OnInit {
       next: (res) => {
         this.showMessage(res, 'success');
         this.getalltables();
+      this.http.getalldeletedtables().subscribe(res=>{
+      this.tablestatus.setDeletedTables(res)
+    })
       },
       error: (err) => {
         this.showMessage(err.error, 'error');

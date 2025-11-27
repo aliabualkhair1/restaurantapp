@@ -6,6 +6,7 @@ import { Spinner } from "../../spinner/spinner";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Environment } from "../../../../Environment/environment";
+import { Tablesstatus } from "../../../../Services/SubComponents/tablesstatus";
 
 @Component({
   selector: 'app-restoredeletedtables',
@@ -22,7 +23,7 @@ export class Restoredeletedtables implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Tablesservices, private router: Router, private routing: ActivatedRoute) {}
+  constructor(private http: Tablesservices, private router: Router, private routing: ActivatedRoute,private tablesstatus:Tablesstatus) {}
 
   ngOnInit(): void {
     this.routing.params.subscribe(params => {
@@ -41,6 +42,7 @@ export class Restoredeletedtables implements OnInit {
     this.http.getalldeletedtables().subscribe({
       next: (res) => {
         this.tables = res;
+        this.tablesstatus.setDeletedTables(res)
         this.loading = false;
       },
       error: (err) => {

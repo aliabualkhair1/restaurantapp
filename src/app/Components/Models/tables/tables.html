@@ -5,14 +5,15 @@
       </div>
 
 <div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && table.length>0">
-  <button (click)="restoretables()" class="btn btn-success top-btn">
-    <i class="bi bi-arrow-clockwise"></i> استعادة ترابيزات محذوفة
-  </button>
   <button (click)="addtable()" class="btn btn-warning top-btn">
     <i class="bi bi-x-octagon"></i> إضافة ترابيزة
   </button>
 </div>
-
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="(isAdmin || isAdminAssistant) && deletedtables.length>0">
+  <button (click)="restoretables()" class="btn btn-success top-btn">
+    <i class="bi bi-arrow-clockwise"></i> استعادة ترابيزات محذوفة
+  </button>
+</div>
 <div class="search-section w-100 mb-4" *ngIf="table.length>0">
   <div class="container-fluid">
     <div class="search-box d-flex align-items-center justify-content-center w-100">
