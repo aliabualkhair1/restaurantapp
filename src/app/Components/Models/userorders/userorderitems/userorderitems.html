@@ -41,7 +41,7 @@
       (refreshed)="getorderitemsbyorderid()">
     </app-update-user-order>
 <div class="d-flex flex-wrap gap-2 justify-content-end delete-btn-container">
-  <button (click)="delete(item.id)" class="btn btn-sm btn-outline-danger flex-grow-1">
+  <button *ngIf="!orderstatus" (click)="delete(item.id)" class="btn btn-sm btn-outline-danger flex-grow-1">
     <i class="bi bi-trash"></i> حذف
   </button>
 </div>    
