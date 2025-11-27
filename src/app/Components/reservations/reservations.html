@@ -96,7 +96,7 @@
     <i class="bi bi-pencil-square"></i> تحديث
   </button>
 
-  <button (click)="delete(reservation.reservationId)" 
+  <button (click)="delete(reservation.reservationId)"  *ngIf="reservation.isPaid==false"
           class="btn btn-sm btn-outline-danger flex-fill">
     <i class="bi bi-trash"></i> حذف
   </button>
