@@ -10,6 +10,8 @@
     <button (click)="getordersfeedback()" class="btn btn-primary top-btn">
         <i class="bi bi-arrow-clockwise"></i> تقييمات الطلبات
     </button>
+</div>
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedorders.length>0">
     <button (click)="getdeletedorders()" class="btn btn-success top-btn">
         <i class="bi bi-arrow-clockwise"></i> استعادة الطلبات المحذوفة
     </button>

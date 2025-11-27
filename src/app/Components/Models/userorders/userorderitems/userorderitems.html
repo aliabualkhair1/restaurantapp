@@ -3,7 +3,7 @@
        style="margin: 0 auto 20px; text-align: center;">
       {{ apiMessage }}
       </div>
-<div class="top-buttons-container d-grid gap-3 mb-4">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedorderitem.length>0">
     <button (click)="getdeletedorderitems(id)" class="btn btn-primary top-btn">
         <i class="bi bi-arrow-clockwise"></i> العناصر المحذوفة
     </button>

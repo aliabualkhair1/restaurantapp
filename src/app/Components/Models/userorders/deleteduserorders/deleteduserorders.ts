@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Spinner } from "../../spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Ordersstatus } from '../../../../Services/SubComponents/ordersstatus';
 
 @Component({
   selector: 'app-deleteduserorders',
@@ -21,7 +22,7 @@ export class Deleteduserorders {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Orderservices, private routing: Router, private router: ActivatedRoute) {}
+  constructor(private http: Orderservices, private routing: Router, private router: ActivatedRoute,private oi:Ordersstatus) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(res => {
@@ -39,6 +40,7 @@ export class Deleteduserorders {
     this.http.getalldeletedorders().subscribe({
       next: (res) => {
         this.orders = res;
+       this.oi.setDeletedOrders(res)
         this.loading = false;
       },
       error: (err) => {

@@ -5,6 +5,7 @@ import { Orderservices } from '../../../Services/orderservices';
 import { Spinner } from "../spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Ordersstatus } from '../../../Services/SubComponents/ordersstatus';
 
 @Component({
   selector: 'app-userorders',
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Userorders {
   orders: Order[] = [];
+  deletedorders: Order[] = [];
   loading: boolean = false;
   id: any;
   date: any;
@@ -21,9 +23,15 @@ export class Userorders {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Orderservices, private routing: Router, private router: ActivatedRoute) {}
+  constructor(private http: Orderservices, private routing: Router, private router: ActivatedRoute ,private oi:Ordersstatus) {}
 
   ngOnInit(): void {
+this.oi.DeletedOrders$.subscribe(data=>{
+this.deletedorders=data
+    })
+    this.http.getalldeletedorders().subscribe(res=>{
+this.oi.setDeletedOrders(res)
+    })
     this.router.params.subscribe(res => {
       this.date = res['date'];
       if (this.date) {
@@ -77,6 +85,9 @@ export class Userorders {
       next: (res) => {
         this.showMessage(res, 'success');
         this.getallorders();
+        this.http.getalldeletedorders().subscribe(res=>{
+        this.oi.setDeletedOrders(res)
+    })
         this.loading = false;
       },
       error: (err) => {

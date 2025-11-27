@@ -6,6 +6,7 @@ import { Orderitem } from '../../../../Interfaces/Models/orderitem';
 import { Orderservices } from '../../../../Services/orderservices';
 import { UpdateUserOrder } from "../update-user-order/update-user-order";
 import { Order } from '../../../../Interfaces/Models/order';
+import { Ordersstatus } from '../../../../Services/SubComponents/ordersstatus';
 
 @Component({
   selector: 'app-orderitems',
@@ -18,15 +19,21 @@ export class UserOrderItems implements OnInit {
   id: any;
   orderitem: Orderitem[] = [];
   loading: boolean = false;
-
+  deletedorderitem: Orderitem[] = [];
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Orderservices, private routing: ActivatedRoute, private router: Router) {
+  constructor(private http: Orderservices, private routing: ActivatedRoute, private router: Router,private oi:Ordersstatus) {
     this.id = this.routing.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
+    this.oi.DeletedOrderItems$.subscribe(data=>{
+this.deletedorderitem=data
+    })
+    this.http.getdeleteditems(this.id).subscribe(res=>{
+this.oi.setDeletedOrderItems(res)
+    })
     this.getorderitemsbyorderid();
   }
 
@@ -54,6 +61,9 @@ export class UserOrderItems implements OnInit {
       next: (res: any) => {
         this.showMessage(res, 'success');
         this.getorderitemsbyorderid();
+            this.http.getdeleteditems(this.id).subscribe(res=>{
+            this.oi.setDeletedOrderItems(res)
+    })
         this.loading = false;
       },
       error: (err) => {
