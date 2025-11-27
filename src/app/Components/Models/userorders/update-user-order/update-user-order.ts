@@ -20,6 +20,7 @@ updateorderitem:Updateorderitem={
 }
 @Input() orderid!:number
 @Input() orderitemid!:number
+@Input() isPaid!: boolean;
 @Output() refreshed = new EventEmitter<void>();
 constructor(private http:Orderservices,private router:Router){}
 newquantity(){
