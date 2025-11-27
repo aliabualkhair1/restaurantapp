@@ -76,7 +76,7 @@
           class="btn action-btn success">
           إضافة تقييم
         </button>
-        <button 
+        <button *ngIf="!order.isPaid"
           (click)="delete(order.orderId)"
           class="btn action-btn danger">
           حذف الطلب
