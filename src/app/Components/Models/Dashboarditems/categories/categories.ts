@@ -124,6 +124,6 @@ export class Categories implements OnInit {
   private showMessage(message: string, type: 'success' | 'error') {
     this.apiMessage = message;
     this.apiMessageType = type;
-    setTimeout(() => this.apiMessage = '', type === 'success' ? 1000 : 5000);
+    setTimeout(() => this.apiMessage = '', type === 'success' ? 2000 : 5000);
   }
 }
