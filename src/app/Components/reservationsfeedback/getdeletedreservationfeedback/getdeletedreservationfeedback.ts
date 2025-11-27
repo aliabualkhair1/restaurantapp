@@ -5,7 +5,7 @@ import { UserReservationFeedback } from '../../../Interfaces/Models/reservationf
 import { ReserationServices } from '../../../Services/reseration-services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinner } from "../../Models/spinner/spinner";
-
+import { ReservationStatus } from '../../../Services/SubComponents/reservation-status';
 @Component({
   selector: 'app-getdeletedreservationfeedback',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, Spinner],
@@ -20,7 +20,7 @@ export class Getdeletedreservationfeedback {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router) {}
+  constructor(private http: ReserationServices, private router: ActivatedRoute, private routing: Router,private res:ReservationStatus) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(res => {
@@ -38,6 +38,7 @@ export class Getdeletedreservationfeedback {
     this.http.getalldeletedreservationsfeedback().subscribe({
       next: (res) => {
         this.userreservationsfeedback = res;
+        this.res.setDeletedReservationsFeedbacks(res)
         this.loading = false;
       },
       error: (err) => {
