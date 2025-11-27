@@ -120,7 +120,7 @@ export const routes: Routes = [
   { path: 'restoredeletedcategories/:name', component: Restorecategory, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path: 'restoredeletedcategories/restore/:id', component: Restorecategory, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path: 'categories', component: Categories, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
-  { path: 'categories/:search', component: Categories, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },  
+  { path: 'categories/:name', component: Categories, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },  
   { path: 'addcategory', component: Addcategory, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path: 'updatecategory/:id', component: Updatecategory, canActivate: [roleauthguardGuard], data: { roles: ['Admin','AdminAssistant'] } },
   { path: 'addcomplaintsandsuggestions', component: Addcomplaintandsuggestion, canActivate: [roleauthguardGuard], data: { roles: ['Customer','Staff','AdminAssistant','Admin'] } },
