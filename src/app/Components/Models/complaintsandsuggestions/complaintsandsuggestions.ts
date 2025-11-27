@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddOrUpdateComplaintsAndSuggestions, showComplaintsAndSuggestions } from '../../../Interfaces/Models/complaintsandsuggestions';
 import { Complaintandsuggestionservice } from '../../../Services/complaintandsuggestionservice';
+import { Complaintsandsuggestionsstatus } from '../../../Services/SubComponents/complaintsandsuggestionsstatus';
 
 @Component({
   selector: 'app-complaintsandsuggestions',
@@ -16,13 +17,20 @@ export class Complaintsandsuggestions implements OnInit {
   loading: boolean = false;
   complaintsandsuggestions: showComplaintsAndSuggestions[] = [];
   complaintandsuggestion!: AddOrUpdateComplaintsAndSuggestions;
+  deletedcomplaintsandsuggestions: showComplaintsAndSuggestions[] = [];
 
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: Complaintandsuggestionservice, private router: Router, private routing: ActivatedRoute) {}
+  constructor(private http: Complaintandsuggestionservice, private router: Router, private routing: ActivatedRoute,private compandsugg:Complaintsandsuggestionsstatus) {}
 
   ngOnInit(): void {
+    this.compandsugg.deletedComplaintsandsuggestions$.subscribe(data=>{
+    this.deletedcomplaintsandsuggestions=data
+    })
+    this.http.getdeletedcomplaintsandsuggestions().subscribe(res=>{
+      this.compandsugg.setDeletedComplaintsAndSuggestions(res)
+    })
     this.getallcomplaintsandsuggestions();
   }
 
@@ -57,8 +65,11 @@ export class Complaintsandsuggestions implements OnInit {
         this.apiMessage = res;
         this.apiMessageType = 'success';
         setTimeout(() => this.apiMessage = '', 1000);
-        this.loading = false;
         this.getallcomplaintsandsuggestions();
+        this.http.getdeletedcomplaintsandsuggestions().subscribe(res=>{
+      this.compandsugg.setDeletedComplaintsAndSuggestions(res)
+    })
+        this.loading = false;
       },
       error: (err) => {
         this.apiMessage = err.error || 'حدث خطأ أثناء الحذف';
