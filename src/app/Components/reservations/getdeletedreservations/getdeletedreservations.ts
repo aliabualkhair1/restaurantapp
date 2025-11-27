@@ -20,7 +20,7 @@ export class Getdeletedreservations {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute) {}
+  constructor(private http: ReserationServices, private routing: Router, private router: ActivatedRoute,private res:ReservationStatus) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(res => {
@@ -38,6 +38,7 @@ export class Getdeletedreservations {
     this.http.getalldeletedreservations().subscribe({
       next: (res) => {
         this.reservations = res;
+        this.res.setDeletedReservations(res)
         this.loading = false;
       },
       error: (err) => {
