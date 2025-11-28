@@ -29,6 +29,7 @@ export const authenticationinterceptorInterceptor: HttpInterceptorFn = (req, nex
             switchMap(res => {
               isRefreshing = false;
               refreshSubject.next(res.token);
+              refreshSubject.next(null);
 
               localStorage.setItem('access token', res.token);
               localStorage.setItem('refresh token', res.refreshtoken);
@@ -63,7 +64,6 @@ export const authenticationinterceptorInterceptor: HttpInterceptorFn = (req, nex
           );
         }
       }
-
       return throwError(() => error);
     })
   );
