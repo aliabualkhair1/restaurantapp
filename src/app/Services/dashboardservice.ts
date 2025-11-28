@@ -22,6 +22,9 @@ export class Dashboardservice {
     getallusers(){
    return this.http.get<User[]>(Environment.BaseURL+'AdminsDashboard/GetAllUsers')
   }
+    getuserbyusername(username:string){
+   return this.http.get<User>(Environment.BaseURL+'AdminsDashboard/GetUser?name='+username)
+  }
     userrolewithusername(newrole:Role) :Observable<string>{
     return this.http.patch<string>(Environment.BaseURL+'AdminsDashboard/ChangeUserRole',newrole,{responseType:'text' as 'json'})
   }
