@@ -4,9 +4,10 @@ import { Dashboardservice } from "../../../../../../Services/dashboardservice"
 import { ActivatedRoute } from "@angular/router"
 import { Spinner } from "../../../../spinner/spinner"
 import { CommonModule } from "@angular/common"
+import { TranslationPipe } from "../../../../../../TranslationPipe/translation-pipe";
 @Component({
   selector: 'app-userreservationscancelled',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule, TranslationPipe],
   templateUrl: './userreservationscancelled.html',
   styleUrl: './userreservationscancelled.css',
 })

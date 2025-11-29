@@ -30,28 +30,34 @@
                         <strong>تاريخ الطلب:</strong>
                         <span>{{ order.orderDate }}</span>
                     </li>
-
-                    <li class="list-group-item d-flex justify-content-between align-items-center order-status-row">
-                        <strong>حالة الطلب:</strong>
-                        <span class="order-status-badge">{{ order.status }}</span>
-                    </li>
-
-                    <li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
-                        <strong>السعر الإجمالي:</strong>
-                        <span>{{ order.totalPrice }}</span>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div class="card-footer p-0 border-0">
-                <button (click)="getuserorderspaid(order.userId)" class="btn btn-primary w-100 p-3 get-items-btn">
-                    عرض عناصر الطلب
-                </button>
-            </div>
-
-        </div>
-    </div>
+<li class="list-group-item d-flex justify-content-between align-items-center order-status-row">
+<strong>حالة الطلب:</strong>
+<span 
+  class="badge px-2 py-1 fs-6 border border-2 rounded-pill"
+  style="font-size: 0.8rem;"
+  [ngClass]="{
+    'text-bg-warning border-warning': order.status === 'Pending',
+    'text-bg-info border-info': order.status === 'InProgress',
+    'text-bg-success border-success': order.status === 'Completed',
+    'text-bg-danger border-danger': order.status === 'Cancelled'
+  }"
+>
+  {{ order.status | translation }}
+</span>                        
+</li>
+<li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
+<strong>السعر الإجمالي:</strong>
+<span>{{ order.totalPrice }}</span>
+</li>
+ </ul>
+</div>
+<div class="card-footer p-0 border-0">
+<button (click)="getuserorderspaid(order.userId)" class="btn btn-primary w-100 p-3 get-items-btn">
+ عرض عناصر الطلب
+</button>
+</div>
+</div>
+</div>
 </div>
 <div *ngIf="orders.length==0" class="empty-cart">
 <h3>لا توجد أى طلبات مدفوعة حتى الأن</h3>

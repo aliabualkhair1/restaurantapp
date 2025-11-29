@@ -6,7 +6,7 @@
 
 <div class="filters" *ngIf="menuitems.length>0">
   <input type="text" [(ngModel)]="menuName" placeholder="اسم القائمة" />
-  <input type="text" [(ngModel)]="itemName" placeholder="اسم الصنف" />
+  <input type="text" [(ngModel)]="itemName" placeholder="اسم المنتج" />
   <input type="number" [(ngModel)]="minPrice" placeholder="أقل سعر" />
   <input type="number" [(ngModel)]="maxPrice" placeholder="أعلى سعر" />
   <input type="number" [(ngModel)]="price" placeholder="السعر" />
@@ -45,7 +45,7 @@
 
           <div class="d-flex flex-wrap gap-2 justify-content-end">
             <button (click)="restoreMenuItem(item.id)" class="btn btn-sm btn-outline-success flex-grow-1">
-              <i class="bi bi-pencil-square"></i> استرجاع عنصر القائمة
+              <i class="bi bi-pencil-square"></i> استرجاع المنتج 
             </button>
           </div>
         </ul>
@@ -60,5 +60,5 @@
   <button class="btn btn-outline-secondary" (click)="nextPage()" [disabled]="currentpage === totalpages">التالي</button>
 </div>
 <div *ngIf="menuitems.length==0" class="empty-cart">
-<h3>لا توجد أى عناصر محذوفة حتى الأن</h3>
+<h3>لا توجد أى منتجات محذوفة حتى الأن</h3>
 </div>

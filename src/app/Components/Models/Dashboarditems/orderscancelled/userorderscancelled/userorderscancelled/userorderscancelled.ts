@@ -6,9 +6,10 @@
   import { CommonModule } from "@angular/common"
 import { ApiResponse } from "../../../../../../Interfaces/Models/menuiteminterface"
 import { Order } from "../../../../../../Interfaces/Models/order"
+import { TranslationPipe } from "../../../../../../TranslationPipe/translation-pipe";
   @Component({
     selector: 'app-userorderscancelled',
-    imports: [CommonModule, Spinner],
+    imports: [CommonModule, Spinner, TranslationPipe],
     templateUrl: './userorderscancelled.html',
     styleUrl: './userorderscancelled.css',
   })

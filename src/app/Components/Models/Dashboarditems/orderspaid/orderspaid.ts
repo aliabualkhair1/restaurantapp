@@ -4,10 +4,11 @@ import { Order } from "../../../../Interfaces/Models/order"
 import { Dashboardservice } from "../../../../Services/dashboardservice"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
+import { TranslationPipe } from "../../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-orderspaid',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule, TranslationPipe],
   templateUrl: './orderspaid.html',
   styleUrl: './orderspaid.css',
 })

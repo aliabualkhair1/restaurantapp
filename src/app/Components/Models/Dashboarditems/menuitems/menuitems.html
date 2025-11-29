@@ -6,18 +6,18 @@
 
 <div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedmenuitems.length>0">
   <button (click)="getdeletedmenuitems()" class="btn btn-success top-btn">
-    <i class="bi bi-arrow-clockwise"></i> استرجاع عنصر قائمة
+    <i class="bi bi-arrow-clockwise"></i> استرجاع المنتجات المحذوفة 
   </button>
   </div>
   <div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="unavailablemenuitems.length>0">
   <button (click)="unavailable()" class="btn btn-warning top-btn">
-    <i class="bi bi-x-octagon"></i> العناصر غير المتاحة
+    <i class="bi bi-x-octagon"></i> المنتجات غير المتاحة
   </button>
 </div>
 
 <div class="filters" *ngIf="menuitems.length>0">
   <input type="text" [(ngModel)]="menuName" placeholder="اسم القائمة" />
-  <input type="text" [(ngModel)]="itemName" placeholder="اسم الصنف" />
+  <input type="text" [(ngModel)]="itemName" placeholder="اسم المنتج" />
   <input type="number" [(ngModel)]="minPrice" placeholder="أقل سعر" />
   <input type="number" [(ngModel)]="maxPrice" placeholder="أعلى سعر" />
   <input type="number" [(ngModel)]="price" placeholder="السعر" />
@@ -73,7 +73,7 @@
   <button class="btn btn-outline-secondary" (click)="nextpage()" [disabled]="currentpage === totalpages">التالي</button>
 </div>
 <div *ngIf="menuitems.length==0" class="empty-cart">
-  <h3>لا توجد أى عناصر حتى الأن</h3>
+  <h3>لا توجد أى منتجات حتى الأن</h3>
   <button (click)="addmenuitem()">أضف </button>
 </div>
 

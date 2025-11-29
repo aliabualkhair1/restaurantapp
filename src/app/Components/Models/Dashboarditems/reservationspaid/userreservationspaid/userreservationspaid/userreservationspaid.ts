@@ -4,9 +4,10 @@ import { ActivatedRoute } from "@angular/router"
 import { Spinner } from "../../../../spinner/spinner";
 import { CommonModule } from "@angular/common";
 import {UserReservations } from "../../../../../../Interfaces/Models/reservation";
+import { TranslationPipe } from "../../../../../../TranslationPipe/translation-pipe";
 @Component({
   selector: 'app-userreservationspaid',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule, TranslationPipe],
   templateUrl: './userreservationspaid.html',
   styleUrl: './userreservationspaid.css',
 })

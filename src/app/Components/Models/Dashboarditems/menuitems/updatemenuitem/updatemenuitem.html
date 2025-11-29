@@ -9,16 +9,16 @@
 
       <div class="form-header">
         <i class="bi bi-chat-dots"></i>
-        <h3>تحديث عنصر القائمة</h3>
+        <h3>تحديث المنتج</h3>
       </div>
 
       <div class="form-group">
-        <label for="ItemName">اسم الصنف</label>
+        <label for="ItemName">اسم المنتج</label>
         <input 
           id="ItemName" 
           type="text" 
           class="form-control" 
-          placeholder="أدخل اسم الصنف" 
+          placeholder="أدخل اسم المنتج" 
           formControlName="ItemName"
         />
         <div *ngIf="ItemName?.touched && ItemName?.invalid" class="error">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="form-group">
-        <label for="ItemImage">صورة الصنف</label>
+        <label for="ItemImage">صورة المنتج</label>
         <input
           id="ItemImage"
           type="file"
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-submit">تحديث عنصر القائمة</button>
+      <button type="submit" class="btn-submit">تحديث المنتج </button>
 
     </form>
   </div>

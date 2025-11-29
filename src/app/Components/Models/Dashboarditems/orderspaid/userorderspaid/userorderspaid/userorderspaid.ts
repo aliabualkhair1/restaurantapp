@@ -4,9 +4,10 @@ import { ActivatedRoute } from "@angular/router"
 import { Order } from "../../../../../../Interfaces/Models/order"
 import { Spinner } from "../../../../spinner/spinner";
 import { CommonModule } from "@angular/common";
+import { TranslationPipe } from "../../../../../../TranslationPipe/translation-pipe";
 @Component({
   selector: 'app-userorderspaid',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule, TranslationPipe],
   templateUrl: './userorderspaid.html',
   styleUrl: './userorderspaid.css',
 })
