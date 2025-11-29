@@ -113,13 +113,6 @@
   padding: 10px 14px;
 }
 
-.status-pill {
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-align: center;
-}
 
 .menu-card button {
   border-radius: 8px;
@@ -177,7 +170,7 @@
   background-color: #0056b3;
   transform: scale(1.05);
 }
- .alert.success {
+.alert.success {
   background-color: #4caf50;
   color: white;
 }
@@ -185,5 +178,21 @@
 .alert.error {
   background-color: #f44336;
   color: white;
+}
+.status-pill {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.status-available {
+  background: #28a745;
+}
+.status-reserved {
+  background: #ff9800;
+}
+.status-occupied {
+  background: #e53935;
 }
 

@@ -6,10 +6,11 @@ import { Spinner } from "../spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Ordersstatus } from '../../../Services/SubComponents/ordersstatus';
+import { TranslationPipe } from "../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-userorders',
-  imports: [Spinner, CommonModule, FormsModule],
+  imports: [Spinner, CommonModule, FormsModule, TranslationPipe],
   templateUrl: './userorders.html',
   styleUrl: './userorders.css',
 })

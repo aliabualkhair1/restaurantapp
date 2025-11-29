@@ -7,39 +7,45 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-user-order',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './update-user-order.html',
   styleUrl: './update-user-order.css',
 })
 export class UpdateUserOrder {
-  loading:boolean=false
-appear:boolean=false
-quantity!:number
-updateorderitem:Updateorderitem={
-  quantity:0
-}
-@Input() orderid!:number
-@Input() orderitemid!:number
-@Input() isPaid!: boolean;
-@Output() refreshed = new EventEmitter<void>();
-constructor(private http:Orderservices,private router:Router){}
-newquantity(){
-  this.updateorderitem.quantity=this.quantity
-}
-update(){
-  this.newquantity()
-  this.loading=true
-this.http.updateorder(this.orderid,this.orderitemid,this.updateorderitem).subscribe({
-  next:(res)=>{
-    alert(res)
-this.refreshed.emit()
-    this.loading=false
-    this.appear=false
-  },
-  error:(err)=>{
-    alert(err.error)
-    this.loading=false
+  loading: boolean = false;
+  appear: boolean = false;
+  quantity!: number;
+
+  updateorderitem: Updateorderitem = {
+    quantity: 0
+  };
+
+  @Input() orderid!: number;
+  @Input() orderitemid!: number;
+  @Input() isPaid!: boolean;
+
+  @Output() refreshed = new EventEmitter<{ message: string; type: 'success' | 'error' }>();
+
+  constructor(private http: Orderservices, private router: Router) {}
+
+  newquantity() {
+    this.updateorderitem.quantity = this.quantity;
   }
-})
-}
+
+  update() {
+    this.newquantity();
+    this.loading = true;
+
+    this.http.updateorder(this.orderid, this.orderitemid, this.updateorderitem).subscribe({
+      next: (res) => {
+        this.refreshed.emit({ message: res, type: 'success' });
+        this.loading = false;
+        this.appear = false;
+      },
+      error: (err) => {
+        this.refreshed.emit({ message: err.error, type: 'error' });
+        this.loading = false;
+      }
+    });
+  }
 }

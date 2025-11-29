@@ -3,10 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Tablesservices } from "../../../../Services/tablesservices"
 import { ActivatedRoute, Router } from "@angular/router"
 import { CommonModule } from "@angular/common"
+import { TranslationPipe } from "../../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-addtable',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslationPipe],
   templateUrl: './addtable.html',
   styleUrl: './addtable.css',
 })

@@ -45,7 +45,6 @@ this.oi.setDeletedOrderItems(res)
         if (res && res.length > 0) {
           this.orderitem = res[0].orderItems;
           this.orderstatus=res[0].isPaid
-          console.log("ISPAID ::: ", res[0].isPaid, typeof res[0].isPaid);
         } else {
           this.orderitem = [];
         }
@@ -92,4 +91,9 @@ this.oi.setDeletedOrderItems(res)
       this.apiMessageType = '';
     }, 5000);
   }
+  handleChildMessage(event: { message: string; type: 'success' | 'error' }) {
+  this.showMessage(event.message, event.type);
+  this.getorderitemsbyorderid();
+}
+
 }

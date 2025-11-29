@@ -6,11 +6,11 @@ import { User } from '../../../Interfaces/Models/user';
 import { Role } from '../../../Interfaces/Models/role';
 import { Dashboardservice } from '../../../Services/dashboardservice';
 import { Roles } from '../../../Services/roles';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [Spinner, CommonModule],
+  imports: [Spinner, CommonModule,FormsModule],
   templateUrl: './users.html',
   styleUrls: ['./users.css'],
 })
@@ -21,15 +21,22 @@ export class Users implements OnInit {
   username: any;
   role!: Role;
   isauth: boolean = false;
-
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
   constructor(private http: Dashboardservice, private router: Router, private routing: ActivatedRoute, private auth: Roles) {}
 
   ngOnInit(): void {
+      this.routing.params.subscribe(res=>{
+      this.username=res['username']
+      if(this.username){
+this.getuser(this.username)
+      }
+      else{
+        this.getallusers();
+      }
+    }) 
     this.isauth = this.auth.isAdmin();
-    this.getallusers();
   }
 
   getallusers() {
@@ -45,7 +52,28 @@ export class Users implements OnInit {
       }
     });
   }
-
+getuser(name:string){
+this.http.getuserbyusername(name).subscribe({
+  next:(res)=>{
+    this.users = [res];
+  },
+  error:(err)=>{
+    this.loading=false
+    this.showMessage(err.error || 'حدث خطأ من السيرفر', 'error');
+  }
+})
+}
+searchbyusername(name:string){
+      const username = name.trim();
+    if (username !== '') {
+  this.router.navigate(['users',name])
+      this.getuser(name);
+    } else {
+      this.router.navigate(['users']);
+      this.getallusers    
+}
+  this.router.navigate(['users',name])
+}
   updateuserrole(username: string, event: any) {
     const value = event.target.value;
     if (!username) {

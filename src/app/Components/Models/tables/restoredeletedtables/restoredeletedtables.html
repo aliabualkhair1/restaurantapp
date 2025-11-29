@@ -9,7 +9,7 @@
     <div class="search-box d-flex align-items-center justify-content-center w-100">
       <input
         [(ngModel)]="tablenumber"
-        placeholder="ابحث برقم الطاولة..."
+        placeholder="ابحث برقم الترابيزة..."
         type="text"
         class="form-control search-input flex-grow-1"
       />
@@ -29,7 +29,7 @@
     <div class="card h-100 shadow-sm menu-card">
       <div class="card-header bg-card-header text-white d-flex justify-content-between align-items-center">
         <h5 class="card-title mb-0">
-          رقم الطاولة {{ table.tableNumber }}
+          رقم الترابيزة {{ table.tableNumber }}
         </h5>
       </div>
       
@@ -37,27 +37,23 @@
         <div class="item-image mb-3">
           <img [src]="environment+'/Images/'+ table.tableImage" alt="{{ table.tableImage }}" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" />
         </div>
-        <p class="card-text text-muted mb-3">
-          <strong>الموقع:</strong> {{ table.location || 'غير معروف' }}
-        </p>
+            <div class="d-flex justify-content-between align-items-center detail-item">
+            <strong>المكان:</strong>
+              {{ table.location|translation }}
+          </div>
         <div class="details-section mb-3">
           <div class="d-flex justify-content-between align-items-center detail-item mb-2">
             <strong>السعة:</strong>
-            <span class="badge text-bg-info category-badge">{{ table.capacity }}</span>
+            <span>{{ table.capacity }}</span>
           </div>
-          <div class="d-flex justify-content-between align-items-center detail-item">
-            <strong>الحالة:</strong>
-            <span
-              class="status-pill"
-              [class.status-available]="table.status === 'Available'"
-              [class.status-unavailable]="table.status === 'Unavailable'"
-            >
-              {{ table.status === 'Available' ? 'متاحة' : 'غير متاحة' }}
-            </span>
-          </div>
+         <div class="d-flex justify-content-between align-items-center detail-item">
+  <strong>الحالة:</strong>
+<span class="badge text-bg-danger fs-8 px-3 py-2 border border-danger border-2 rounded-pill">
+{{ table.status === 'Available' ? 'متاحة' : 'غير متاحة' }}
+  </span>
+</div>
         </div>
       </div>
-
       <div class="card-footer bg-card-footer">
         <div class="d-flex flex-wrap gap-2 justify-content-end">
           <button (click)="restoretable(table.id)" class="btn btn-sm btn-outline-success flex-grow-1">

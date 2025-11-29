@@ -42,8 +42,18 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center order-status-row">
                         <strong>حالة الطلب:</strong>
-                        <span class="order-status-badge">{{ order.status }}</span>
-                    </li>
+<span 
+  class="badge px-2 py-1 fs-6 border border-2 rounded-pill"
+  style="font-size: 0.8rem;"
+  [ngClass]="{
+    'text-bg-warning border-warning': order.status === 'Pending',
+    'text-bg-info border-info': order.status === 'InProgress',
+    'text-bg-success border-success': order.status === 'Completed',
+    'text-bg-danger border-danger': order.status === 'Cancelled'
+  }"
+>
+  {{ order.status | translation }}
+</span>                     </li>
                     <li class="list-group-item total-price-row d-flex justify-content-between align-items-center">
                         <strong>السعر الإجمالي:</strong>
                         <span>{{ order.totalPrice }}</span>

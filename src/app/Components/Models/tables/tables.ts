@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { Environment } from '../../../Environment/environment';
 import { Roles } from '../../../Services/roles';
 import { Tablesstatus } from '../../../Services/SubComponents/tablesstatus';
+import { TranslationPipe } from "../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-tables',
-  imports: [Spinner, CommonModule, FormsModule],
+  imports: [Spinner, CommonModule, FormsModule, TranslationPipe],
   templateUrl: './tables.html',
   styleUrl: './tables.css',
 })

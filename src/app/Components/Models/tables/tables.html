@@ -17,7 +17,7 @@
 <div class="search-section w-100 mb-4" *ngIf="table.length>0">
   <div class="container-fluid">
     <div class="search-box d-flex align-items-center justify-content-center w-100">
-      <input [(ngModel)]="tablenumber" placeholder="البحث برقم الطاولة..." type="text" class="form-control search-input flex-grow-1"/>
+      <input [(ngModel)]="tablenumber" placeholder="البحث برقم الترابيزة..." type="text" class="form-control search-input flex-grow-1"/>
       <button (click)="search(tablenumber)" class="btn btn-primary ms-2 px-4">
         <i class="bi bi-search"></i> بحث
       </button>
@@ -33,26 +33,33 @@
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let tables of table">
     <div class="card h-100 shadow-sm menu-card">
       <div class="card-header bg-card-header text-white d-flex justify-content-between align-items-center">
-        <h5 class="card-title mb-0">رقم الترابيزة{{ tables.tableNumber }}</h5>
+        <h5 class="card-title mb-0">رقم الترابيزة</h5>
+        <span>{{ tables.tableNumber }}</span>
       </div>
       <div class="card-body">
         <div class="item-image mb-3">
           <img [src]="environment+'/Images/'+ tables.tableImage" alt="{{ tables.tableImage }}" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" />
         </div>
-        <p class="card-text text-muted mb-3">
-          <strong>المكان:</strong> {{ tables.location || 'غير متوفر' }}
-        </p>
+          <div class="d-flex justify-content-between align-items-center detail-item">
+            <strong>المكان:</strong>
+              {{ tables.location|translation }}
+          </div>
         <div class="details-section mb-3">
           <div class="d-flex justify-content-between align-items-center detail-item mb-2">
             <strong>السعة:</strong>
-            <span class="badge text-bg-info category-badge">{{ tables.capacity }}</span>
+            <span>{{ tables.capacity }}</span>
           </div>
-          <div class="d-flex justify-content-between align-items-center detail-item">
-            <strong>الحالة:</strong>
-            <span class="status-pill" [class.status-available]="tables.status === 'Available'" [class.status-unavailable]="tables.status === 'Unavailable'">
-              {{ tables.status === 'Available' ? 'متاحة' : 'غير متاحة' }}
-            </span>
-          </div>
+<div class="d-flex justify-content-between align-items-center detail-item">
+  <strong>الحالة:</strong>
+  <span class="status-pill"
+        [ngClass]="{
+          'status-available': tables.status === 'Available',
+          'status-reserved': tables.status === 'Reserved',
+          'status-occupied': tables.status === 'Occupied'
+        }">
+    {{ tables.status === 'Available' ? 'متاحة' : tables.status === 'Reserved' ? 'محجوزة' : 'مشغولة' }}
+  </span>
+</div>
         </div>
         <div class="card-footer bg-card-footer">
           <div class="d-flex flex-wrap gap-2 justify-content-end">
@@ -73,8 +80,6 @@
       </div>
     </div>
   </div>
-</div>
-
 <div class="d-flex justify-content-center align-items-center mt-4 gap-3" *ngIf="!loading && table.length > 0">
   <button class="btn btn-outline-secondary" (click)="prevPage()" [disabled]="currentpage === 1">السابق</button>
   <span class="fw-bold">صفحة {{currentpage}} من {{totalpages}}</span>

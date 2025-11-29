@@ -3,11 +3,12 @@ import { Tablesservices } from '../../../../Services/tablesservices';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslationPipe } from "../../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-updatetable',
   standalone:true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslationPipe],
   templateUrl: './updatetable.html',
   styleUrl: './updatetable.css',
 })

@@ -7,10 +7,11 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Environment } from "../../../../Environment/environment";
 import { Tablesstatus } from "../../../../Services/SubComponents/tablesstatus";
+import { TranslationPipe } from "../../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-restoredeletedtables',
-  imports: [Spinner, CommonModule, FormsModule],
+  imports: [Spinner, CommonModule, FormsModule, TranslationPipe],
   templateUrl: './restoredeletedtables.html',
   styleUrl: './restoredeletedtables.css',
 })

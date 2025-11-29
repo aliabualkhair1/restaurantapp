@@ -3,7 +3,16 @@
        style="margin: 0 auto 20px; text-align: center;">
       {{ apiMessage }}
       </div>
-
+<div class="search-section w-100 mb-4" *ngIf="users.length>0">
+  <div class="container-fluid">
+    <div class="search-box d-flex align-items-center justify-content-center w-100">
+      <input [(ngModel)]="username" placeholder="البحث بإسم المستخدم.." type="text" class="form-control search-input flex-grow-1"/>
+      <button (click)="searchbyusername(username)" class="btn btn-primary ms-2 px-4">
+        <i class="bi bi-search"></i> بحث
+      </button>
+    </div>
+  </div>
+</div>
 <div class="loading-container" *ngIf="loading">
   <app-spinner></app-spinner>
 </div>

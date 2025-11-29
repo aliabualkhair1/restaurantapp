@@ -113,11 +113,23 @@
 }
 
 .status-pill {
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-weight: 600;
   font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  min-width: 70px;
   text-align: center;
+}
+.status-available {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #2e7d32;
+  border: 1px solid rgba(76, 175, 80, 0.4);
+}
+.status-unavailable {
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #c62828;
+  border: 1px solid rgba(244, 67, 54, 0.4);
 }
 
 .menu-card button {
