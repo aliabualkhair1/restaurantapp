@@ -3,23 +3,21 @@
        style="margin: 0 auto 20px; text-align: center;">
       {{ apiMessage }}
       </div>
-
-<div class="search-section w-100 mb-4" *ngIf="orders.length>0">
+<div class="search-section w-100 mb-4" *ngIf="orders.length > 0">
   <div class="container-fluid">
-    <div class="search-box d-flex align-items-center justify-content-center w-100">
+    <div class="search-box d-flex align-items-center justify-content-center">
       <input
         [(ngModel)]="date"
-        placeholder="البحث بتاريخ الطلب..."
         type="date"
-        class="form-control search-input flex-grow-1"
+        placeholder="ابحث بتاريخ الطلب..."
+        class="form-control search-input"
       />
-      <button (click)="search(date)" class="btn btn-primary ms-2 px-4">
+      <button (click)="search(date)" class="btn btn-primary search-btn">
         <i class="bi bi-search"></i> بحث
       </button>
     </div>
   </div>
 </div>
-
 <div class="text-center w-100" *ngIf="loading">
     <app-spinner></app-spinner>
 </div>
