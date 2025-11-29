@@ -4,18 +4,17 @@
       {{ apiMessage }}
       </div>
 <div class="search-section w-100 mb-4" *ngIf="orders.length > 0">
-  <div class="container-fluid">
-    <div class="search-box d-flex align-items-center justify-content-center">
-      <input
-        [(ngModel)]="date"
-        type="date"
-        placeholder="ابحث بتاريخ الطلب..."
-        class="form-control search-input"
-      />
-      <button (click)="search(date)" class="btn btn-primary search-btn">
-        <i class="bi bi-search"></i> بحث
-      </button>
-    </div>
+  <div class="search-box">
+    <input
+      [(ngModel)]="date"
+      type="date"
+      placeholder="البحث بتاريخ الطلب..."
+      class="form-control search-input"
+    />
+
+    <button (click)="search(date)" class="btn btn-primary search-btn">
+      <i class="bi bi-search"></i> بحث
+    </button>
   </div>
 </div>
 <div class="text-center w-100" *ngIf="loading">
