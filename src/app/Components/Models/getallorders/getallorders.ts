@@ -4,10 +4,11 @@ import { Order } from '../../../Interfaces/Models/order';
 import { Spinner } from "../spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationPipe } from "../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-getallorders',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule, TranslationPipe],
   templateUrl: './getallorders.html',
   styleUrl: './getallorders.css',
 })

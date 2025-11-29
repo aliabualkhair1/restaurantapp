@@ -9,7 +9,7 @@
 
       <div class="form-header">
         <i class="bi bi-chat-dots"></i>
-        <h3>تعديل القائمة</h3>
+        <h3>تعديل المينيو</h3>
       </div>
       <div class="form-group">
     <label for="item" class="form-label fw-bold">الفئة</label>
@@ -20,21 +20,21 @@
   </div>
 
       <div class="form-group">
-        <label for="MenuName">اسم القائمة</label>
+        <label for="MenuName">إسم المينيو</label>
         <input 
           id="MenuName" 
           type="text" 
           class="form-control" 
-          placeholder="أدخل اسم القائمة" 
+          placeholder="أدخل اسم المينيو" 
           formControlName="MenuName"
         />
         <div *ngIf="MenuName?.touched && MenuName?.invalid" class="error">
-          <small *ngIf="MenuName?.errors?.['pattern']">يسمح فقط بالحروف الإنجليزية.</small>
+          <small *ngIf="MenuName?.errors?.['pattern']">يسمح فقط بالحروف.</small>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="menuDesc">وصف القائمة</label>
+        <label for="menuDesc">وصف المينيو</label>
         <input 
           id="menuDesc" 
           type="text" 
@@ -46,7 +46,7 @@
           <small *ngIf="Description?.errors?.['pattern']">غير مسموح بالرموز</small>
         </div>
       </div>
-      <button type="submit" class="btn-submit">تحديث القائمة</button>
+      <button type="submit" class="btn-submit">تحديث المينيو</button>
 
     </form>
   </div>

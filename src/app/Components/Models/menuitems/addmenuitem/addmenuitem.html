@@ -8,26 +8,26 @@
       </div>
 
       <div class="form-header">
-        <h3>إضافة عنصر للقائمة</h3>
+        <h3>إضافة منتج للقائمة</h3>
       </div>
 
       <div class="form-group">
-        <label for="itemName">اسم العنصر</label>
+        <label for="itemName">اسم المنتج</label>
         <input 
           id="itemName" 
           type="text" 
           class="form-control" 
-          placeholder="أدخل اسم العنصر" 
+          placeholder="أدخل اسم المنتج" 
           formControlName="ItemName"
         />
         <div *ngIf="ItemName?.touched && ItemName?.invalid" class="error">
-          <small *ngIf="ItemName?.errors?.['required']">اسم العنصر مطلوب.</small>
+          <small *ngIf="ItemName?.errors?.['required']">اسم المنتج مطلوب.</small>
           <small *ngIf="ItemName?.errors?.['pattern']">مسموح بالحروف فقط.</small>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="itemImage">صورة العنصر</label>
+        <label for="itemImage">صورة المنتج</label>
         <input
           id="itemImage"
           type="file"
@@ -70,7 +70,7 @@
           <small *ngIf="Quantity?.errors?.['pattern']">مسموح بالأرقام فقط.</small>
         </div>
       </div>
-      <button type="submit" class="btn-submit" [disabled]="formgroup.invalid">إضافة العنصر</button>
+      <button type="submit" class="btn-submit" [disabled]="formgroup.invalid">إضافة المنتج</button>
     </form>
   </div>
 </div>

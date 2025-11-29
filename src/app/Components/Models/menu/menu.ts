@@ -10,10 +10,11 @@ import { Roles } from '../../../Services/roles';
 import { Menustatus } from '../../../Services/SubComponents/menustatus';
 import { Menuiteminterface } from '../../../Interfaces/Models/menuiteminterface';
 import { Menuitemsstatus } from '../../../Services/SubComponents/menuitemsstatus';
+import { TranslationPipe } from "../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, FormsModule, Spinner],
+  imports: [CommonModule, FormsModule, Spinner, TranslationPipe],
   templateUrl: './menu.html',
   styleUrls: ['./menu.css'],
 })
