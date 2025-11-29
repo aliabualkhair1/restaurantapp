@@ -1,3 +1,8 @@
+<div *ngIf="apiMessage" 
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
 <div class="top-buttons-container d-grid gap-3 mb-4">
   <button *ngIf="userdetails.length>0" (click)="updateaccount()" class="btn btn-primary top-btn">
     <i class="bi bi-arrow-clockwise"></i> تحديث الحساب
@@ -62,7 +67,7 @@
 
           <div class="col-md-6 col-sm-12">
             <label class="text-muted small mb-1">الدور</label>
-            <div class="data-box role">{{ _userdetails.roles }}</div>
+            <div class="data-box role">{{ _userdetails.roles}}</div>
           </div>
         </div>
       </div>

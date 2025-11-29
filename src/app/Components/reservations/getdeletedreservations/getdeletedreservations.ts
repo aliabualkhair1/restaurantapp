@@ -6,10 +6,11 @@ import { Spinner } from "../../Models/spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReservationStatus } from '../../../Services/SubComponents/reservation-status';
+import { TranslationPipe } from "../../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-getdeletedreservations',
-  imports: [Spinner, CommonModule, FormsModule],
+  imports: [Spinner, CommonModule, FormsModule, TranslationPipe],
   templateUrl: './getdeletedreservations.html',
   styleUrl: './getdeletedreservations.css',
 })

@@ -15,7 +15,8 @@ import { CommonModule } from '@angular/common';
 export class Checkuser {
   check!: checkuser;
   formgroup: FormGroup;
-
+ apiMessage: string = '';
+  apiMessageType: 'success' | 'error' = 'success';
   constructor(private http: Authentication, private router: Router) {
     this.formgroup = new FormGroup({
       Email: new FormControl(null, [Validators.required, Validators.email]),
@@ -43,12 +44,20 @@ export class Checkuser {
   checkuserdetails() {
     this.http.checkuser(this.check).subscribe({
       next: (res) => {
-        alert(res);
-        this.router.navigate(['changepassword'], { queryParams: { username: this.formgroup.value.UserName } });
+        this.apiMessage=res
+        this.apiMessageType='success'
+        setTimeout(()=>{
+          this.apiMessage=''
+          this.router.navigate(['changepassword'], { queryParams: { username: this.formgroup.value.UserName } });
+        },1000)
       },
       error: (err) => {
-        alert(err.error);
-      }
+        this.apiMessage = err.error || 'حدث خطأ أثناء التسجيل';
+        this.apiMessageType = 'error';     
+        setTimeout(()=>{
+          this.apiMessage=''
+        },3000)
+       }
     });
   }
 }

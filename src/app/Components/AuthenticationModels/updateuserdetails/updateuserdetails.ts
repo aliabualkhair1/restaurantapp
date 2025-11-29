@@ -4,6 +4,7 @@ import { Updatedetails } from '../../../Interfaces/Models/userdetails';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Roles } from '../../../Services/roles';
 
 @Component({
   selector: 'app-updateuserdetails',
@@ -18,7 +19,7 @@ export class Updateuserdetails {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: Userinfoservice, private router: Router) {
+  constructor(private http: Userinfoservice, private router: Router,private roles:Roles) {
     this.formgroup = new FormGroup({
       Firstname: new FormControl(null, [Validators.pattern('^[A-Za-z]+$')]),
       Lastname: new FormControl(null, [Validators.pattern('^[A-Za-z]+$')]),
@@ -50,14 +51,33 @@ export class Updateuserdetails {
       next: (res) => {
         this.apiMessage = res;
         this.apiMessageType = 'success';
+        localStorage.removeItem('access token');
+        localStorage.removeItem('refresh token');
+        localStorage.removeItem('expire date');
+        this.roles.setAuthStatus(false);        
         setTimeout(() => {
-          this.apiMessage = '';
-        this.router.navigate(['login'])
+        this.apiMessage = '';
+        this.router.navigate(['home'])
         }, 1000);
       },
       error: (err) => {
-        this.apiMessage = err.error || 'حدث خطأ أثناء تحديث البيانات';
-        this.apiMessageType = 'error';
+          
+       let message = '';
+
+if (typeof err.error === 'string') {
+  try {
+    const parsed = JSON.parse(err.error);
+    message = parsed.error || 'حدث خطأ أثناء تحديث البيانات';
+  } catch {
+    message = err.error; 
+  }
+} else if (err.error?.error) {
+  message = err.error.error;
+} else {
+  message = 'حدث خطأ أثناء تحديث البيانات';
+}
+this.apiMessage = message;
+this.apiMessageType = 'error';
         setTimeout(() => this.apiMessage = '', 5000);
       }
     });

@@ -15,7 +15,8 @@ export class Changepassword implements OnInit {
   reset!: ForgetPassword;
   formgroup: FormGroup;
   username: string = '';
-
+ apiMessage: string = '';
+  apiMessageType: 'success' | 'error' = 'success';
   constructor(private http: Authentication, private router: Router, private routing: ActivatedRoute) {
     this.formgroup = new FormGroup({
       Password: new FormControl(null, [
@@ -59,12 +60,20 @@ export class Changepassword implements OnInit {
   checkuserdetails() {
     this.http.resetpassword(this.reset).subscribe({
       next: (res) => {
-        alert(res);
-        this.router.navigate(['login']);
+        this.apiMessage=res
+this.apiMessageType='success'
+setTimeout(()=>{
+this.apiMessage=''
+  this.router.navigate(['login']);
+},1000)
       },
       error: (err) => {
-        alert(err.error);
-      }
+        this.apiMessage = err.error || 'حدث خطأ أثناء التسجيل';
+        this.apiMessageType = 'error';     
+        setTimeout(()=>{
+          this.apiMessage=''
+        },3000)
+       }
     });
   }
 }

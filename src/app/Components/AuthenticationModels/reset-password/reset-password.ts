@@ -4,6 +4,8 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validator
 import { Userinfoservice } from '../../../Services/userinfoservice';
 import { ResetPass } from '../../../Interfaces/Models/userdetails';
 import { Router } from '@angular/router';
+import { Role } from '../../../Interfaces/Models/role';
+import { Roles } from '../../../Services/roles';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +20,7 @@ export class ResetPassword {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' = 'success';
 
-  constructor(private http: Userinfoservice, private router: Router) {
+  constructor(private http: Userinfoservice, private router: Router,private roles:Roles) {
     this.Form = new FormGroup({
       CurrentPassword: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
       NewPassword: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
@@ -50,10 +52,14 @@ export class ResetPassword {
       next: (res: string) => {
         this.apiMessage = res;
         this.apiMessageType = 'success';
+        localStorage.removeItem('access token');
+        localStorage.removeItem('refresh token');
+        localStorage.removeItem('expire date');
+        this.roles.setAuthStatus(false);        
         setTimeout(() => {
-          this.apiMessage = '';
-        this.router.navigate(['login'])
-        }, 1000);
+        this.apiMessage=''
+    this.router.navigate(['home'])        
+  }, 1000);
       },
       error: (err) => {
         this.apiMessage = err.error || 'حدث خطأ أثناء إعادة تعيين كلمة المرور';

@@ -6,10 +6,11 @@ import { Spinner } from '../Models/spinner/spinner';
 import { ReserationServices } from '../../Services/reseration-services';
 import { FormsModule } from '@angular/forms';
 import { ReservationStatus } from '../../Services/SubComponents/reservation-status';
+import { TranslationPipe } from "../../TranslationPipe/translation-pipe";
 
 @Component({
   selector: 'app-reservations',
-  imports: [CommonModule, Spinner, FormsModule],
+  imports: [CommonModule, Spinner, FormsModule, TranslationPipe],
   templateUrl: './reservations.html',
   styleUrl: './reservations.css',
 })

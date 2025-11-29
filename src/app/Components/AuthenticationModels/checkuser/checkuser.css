@@ -87,3 +87,12 @@ html, body {
   background: linear-gradient(90deg, #2a5cb0, #367cff);
   transform: translateY(-2px);
 }
+ .alert.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.alert.error {
+  background-color: #f44336;
+  color: white;
+}

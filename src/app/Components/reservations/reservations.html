@@ -1,28 +1,26 @@
-      <div *ngIf="apiMessage" 
-       [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
-       style="margin: 0 auto 20px; text-align: center;">
-      {{ apiMessage }}
-      </div>
+<div *ngIf="apiMessage"
+     [ngClass]="{'alert': true, 'success': apiMessageType==='success', 'error': apiMessageType==='error'}"
+     style="margin: 0 auto 20px; text-align: center;">
+  {{ apiMessage }}
+</div>
 
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="reservations.length>0">
-    <button (click)="GetReservationsFeedback()" class="btn btn-primary top-btn">
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="reservations.length > 0">
+  <button (click)="GetReservationsFeedback()" class="btn btn-primary top-btn">
     <i class="bi bi-arrow-clockwise"></i> تقييمات الحجوزات
   </button>
 </div>
-<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedreservation.length>0">
-<button (click)="RestoreDeletedReservations()" class="btn btn-success top-btn">
-  <i class="bi bi-arrow-clockwise"></i> استرجاع الحجوزات المحذوفة
-</button>
+
+<div class="top-buttons-container d-grid gap-3 mb-4" *ngIf="deletedreservation.length > 0">
+  <button (click)="RestoreDeletedReservations()" class="btn btn-success top-btn">
+    <i class="bi bi-arrow-clockwise"></i> استرجاع الحجوزات المحذوفة
+  </button>
 </div>
-<div class="search-section w-100 mb-4" *ngIf="reservations.length>0">
+
+<div class="search-section w-100 mb-4" *ngIf="reservations.length > 0">
   <div class="container-fluid">
     <div class="search-box d-flex align-items-center justify-content-center w-100">
-      <input
-        [(ngModel)]="date"
-        placeholder="ابحث بتاريخ الحجز..."
-        type="date"
-        class="form-control search-input flex-grow-1"
-      />
+      <input [(ngModel)]="date" placeholder="ابحث بتاريخ الحجز..." type="date"
+             class="form-control search-input flex-grow-1" />
       <button (click)="search(date)" class="btn btn-primary ms-2 px-4">
         <i class="bi bi-search"></i> بحث
       </button>
@@ -37,6 +35,7 @@
 <div class="row g-4" *ngIf="!loading">
   <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let reservation of reservations">
     <div class="card menu-card h-100">
+
       <div class="card-header">
         <h5 class="card-title mb-0 text-center">
           <strong>تاريخ الحجز:</strong> {{ reservation.dateOfReservation }}
@@ -45,67 +44,82 @@
 
       <div class="card-body p-0">
         <ul class="list-group list-group-flush">
+
           <li class="list-group-item">
             <strong>تاريخ البدء:</strong>
-        <span>{{ '2005-06-22T' + reservation.startDate | date:'hh:mm a' }}</span>
+            <span>{{ ('1970-01-01T' + reservation.startDate) | date:'hh:mm a' }}</span>
           </li>
+
           <li class="list-group-item">
             <strong>تاريخ الانتهاء:</strong>
-        <span>{{ '2005-06-22T' + reservation.endDate | date:'hh:mm a' }}</span>
+            <span>{{ ('1970-01-01T' + reservation.endDate) | date:'hh:mm a' }}</span>
           </li>
+
           <li class="list-group-item">
             <strong>عدد الضيوف:</strong>
             <span>{{ reservation.numberOfGuests }}</span>
           </li>
+
           <li class="list-group-item">
-            <strong>رقم الطاولة:</strong>
+            <strong>رقم الترابيزة:</strong>
             <span>{{ reservation.tableNumber }}</span>
           </li>
+
           <li class="list-group-item">
-            <strong>موقع الطاولة:</strong>
-            <span>{{ reservation.tableLocation }}</span>
+            <strong>موقع الترابيزة:</strong>
+            <span>{{ reservation.tableLocation | translation }}</span>
           </li>
           <li class="list-group-item">
             <strong>حالة الحجز:</strong>
-            <span>{{ reservation.status }}</span>
+<span 
+  class="badge px-2 py-1 fs-6 border border-2 rounded-pill"
+  style="font-size: 0.8rem;"
+  [ngClass]="{
+    'text-bg-warning border-warning': reservation.status === 'Pending',
+    'text-bg-info border-info': reservation.status === 'InProgress',
+    'text-bg-success border-success': reservation.status === 'Completed',
+    'text-bg-danger border-danger': reservation.status === 'Cancelled'
+  }"
+>
+  {{ reservation.status | translation }}
+</span>
           </li>
+          <div class="card-footer total-price-row d-flex justify-content-between align-items-center">
+            <strong>تم الدفع:</strong>
+            <span>{{ reservation.isPaid ? 'نعم' : 'لا' }}</span>
+          </div>
         </ul>
-
-        <div class="card-footer total-price-row d-flex justify-content-between align-items-center">
-          <strong>تم الدفع:</strong>
-          <span>{{ reservation.isPaid ?'نعم':'لا' }}</span>
-        </div>
       </div>
 
-<div class="d-flex flex-wrap gap-2">
-  <button *ngIf="reservation.status=='Pending'" 
-          (click)="confirmation(reservation.reservationId)" 
-          class="btn btn-sm btn-outline-success flex-fill">
-    <i class="bi bi-pencil-square"></i> تأكيد الحجز
-  </button>
+      <div class="d-flex flex-wrap gap-2">
 
-  <button *ngIf="reservation.endDateTime && reservation.endDateTime<now" 
-          (click)="addreservationfeedback(reservation.reservationId)" 
-          class="btn btn-sm btn-outline-warning flex-fill">
-    <i class="bi bi-pencil-square"></i> إضافة تقييم للحجز
-  </button>
+        <button *ngIf="reservation.status=='Pending'"
+                (click)="confirmation(reservation.reservationId)"
+                class="btn btn-sm btn-outline-success flex-fill">
+          <i class="bi bi-pencil-square"></i> تأكيد الحجز
+        </button>
 
-  <button (click)="update(reservation.reservationId)" 
-          class="btn btn-sm btn-outline-primary flex-fill" 
-          *ngIf="reservation.isPaid==false">
-    <i class="bi bi-pencil-square"></i> تحديث
-  </button>
+        <button *ngIf="reservation.endDateTime && reservation.endDateTime < now"
+                (click)="addreservationfeedback(reservation.reservationId)"
+                class="btn btn-sm btn-outline-warning flex-fill">
+          <i class="bi bi-pencil-square"></i> إضافة تقييم للحجز
+        </button>
 
-  <button (click)="delete(reservation.reservationId)"  *ngIf="reservation.isPaid==false"
-          class="btn btn-sm btn-outline-danger flex-fill">
-    <i class="bi bi-trash"></i> حذف
-  </button>
-</div>
-
+        <button *ngIf="reservation.isPaid == false"
+                (click)="update(reservation.reservationId)"
+                class="btn btn-sm btn-outline-primary flex-fill">
+          <i class="bi bi-pencil-square"></i> تحديث
+        </button>
+        <button *ngIf="reservation.isPaid == false"
+                (click)="delete(reservation.reservationId)"
+                class="btn btn-sm btn-outline-danger flex-fill">
+          <i class="bi bi-trash"></i> حذف
+        </button>
+      </div>
+    </div>
   </div>
 </div>
-
-<div *ngIf="reservations.length==0" class="empty-cart">
+<div *ngIf="reservations.length == 0" class="empty-cart">
   <h3>لا توجد حجوزات حتى الآن</h3>
   <button (click)="gettables()">إحجز الأن</button>
 </div>

@@ -5,17 +5,20 @@ import { Userinfoservice } from '../../../Services/userinfoservice';
 import { Spinner } from "../../Models/spinner/spinner";
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { Roles } from '../../../Services/roles';
 @Component({
   selector: 'app-userdetails',
-  imports: [Spinner,CommonModule],
+  imports: [Spinner, CommonModule],
   templateUrl: './userdetails.html',
   styleUrl: './userdetails.css',
 })
 export class Userdetails implements OnInit {
 loading:boolean=false
 userdetails:_Userdetails[]=[]
-constructor(private http:Userinfoservice,private router:Router){}
+  apiMessage: string = '';
+  apiMessageType: 'success' | 'error' = 'success';
+
+constructor(private http:Userinfoservice,private router:Router,private roles:Roles){}
   ngOnInit(): void {
 this.getuserdetails()
   }
@@ -42,12 +45,20 @@ deleteaccount(){
   this.loading=true
   this.http.deleteuser().subscribe({
     next:(res)=>{
-      alert(res)
       this.loading=false
-      this.router.navigate(['login'])
+      this.apiMessage=res
+      this.apiMessageType = 'success';
+       localStorage.removeItem('access token');
+        localStorage.removeItem('refresh token');
+        localStorage.removeItem('expire date');
+        this.roles.setAuthStatus(false);        
+        setTimeout(() => {
+        this.apiMessage ='';
+        this.router.navigate(['home'])
+        }, 2000);
     },
     error:(err)=>{
-      alert(err)
+this.apiMessageType = 'error';
       this.loading=false
     }
   })
