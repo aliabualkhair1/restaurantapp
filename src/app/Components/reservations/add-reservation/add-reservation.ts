@@ -56,8 +56,8 @@ export class AddReservation {
       tableId: this.id,
       numberOfGuests,
       dateOfReservation,
-      startDate: this.formatTime(startDate),
-      endDate: this.formatTime(endDate),
+      startTime: this.formatTime(startDate),
+      endTime: this.formatTime(endDate),
     };
 
     this.addreservation();

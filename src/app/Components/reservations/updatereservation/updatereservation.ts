@@ -46,8 +46,8 @@ export class Updatereservation {
     this.reservation = {
       numberOfGuests,
       dateOfReservation,
-      startDate: this.formatTime(startDate),
-      endDate: this.formatTime(endDate),
+      startTime: this.formatTime(startDate),
+      endTime: this.formatTime(endDate),
     };
 
     this.updatereservation();
