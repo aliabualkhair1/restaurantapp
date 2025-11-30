@@ -38,7 +38,7 @@ export class Dashboardservice {
   return this.http.get<ApiResponse>(Environment.BaseURL+'Orders/'+id)
   }
   getallordersfeedback(){
-   return this.http.get<OrdersFeedback[]>(Environment.BaseURL+'AdminsDashboard/GetUserOrdersFeedback')
+   return this.http.get<OrdersFeedback[]>(Environment.BaseURL+'AdminsDashboard/GetAllOrdersFeedback')
  }
  getuserordersfeedback(userid:string){
    return this.http.get<_UserOrdersFeedback[]>(Environment.BaseURL+'AdminsDashboard/GetUserOrdersFeedback?userid='+userid)
