@@ -77,7 +77,7 @@ export class Addtable {
     this.http.addtable(data).subscribe({
       next:(res)=>{
         this.showMessage(res, 'success');
-        settimeout(()=>{
+        setTimeout(()=>{
         this.router.navigate(['gettables']);          
         },1000);
       },
