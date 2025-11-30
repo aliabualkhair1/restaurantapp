@@ -57,7 +57,7 @@
           'status-reserved': tables.status === 'Reserved',
           'status-occupied': tables.status === 'Occupied'
         }">
-    {{ tables.status === 'Available' ? 'متاحة' : tables.status === 'Reserved' ? 'محجوزة' : 'مشغولة' }}
+    {{tables.status|translation}}
   </span>
 </div>
         </div>
