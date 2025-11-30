@@ -33,24 +33,34 @@ export class Tables implements OnInit {
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
-  constructor(private http: Tablesservices, private router: Router, private routing: ActivatedRoute, private auth: Roles,private tablestatus:Tablesstatus) {}
+  constructor(
+    private http: Tablesservices,
+    private router: Router,
+    private routing: ActivatedRoute,
+    private auth: Roles,
+    private tablestatus: Tablesstatus
+  ) {}
 
   ngOnInit(): void {
     this.isAdmin = this.auth.isAdmin();
     this.isAdminAssistant = this.auth.isAdminAssistant();
     this.isStaff = this.auth.isStaff();
     this.isCustomer = this.auth.isCustomer();
-    this.tablestatus.deletedtables$.subscribe(data=>{
-    this.deletedtables=data
-    })
-    this.http.getalldeletedtables().subscribe(res=>{
+
+    this.tablestatus.deletedtables$.subscribe(data => {
+      this.deletedtables = data
+    });
+
+    this.http.getalldeletedtables().subscribe(res => {
       this.tablestatus.setDeletedTables(res)
-    })
+    });
+
     this.routing.params.subscribe(params => {
       this.tablenumber = params['tablenumber'];
       if (this.tablenumber) {
         this.searchbyname(this.tablenumber);
       } else {
+        this.currentpage = 1;
         this.getalltables();
       }
     });
@@ -58,11 +68,13 @@ export class Tables implements OnInit {
 
   getalltables() {
     this.loading = true;
-    this.http.getalltables(this.currentpage).subscribe({
+    const page = this.currentpage || 1;
+
+    this.http.getalltables(page).subscribe({
       next: (res) => {
         this.table = res.items;
-        this.currentpage = res.pageNumber;
-        this.totalpages = res.totalPages;
+        this.currentpage = res.pageNumber || 1;
+        this.totalpages = res.totalPages || 1;
         this.loading = false;
       },
       error: (err) => {
@@ -92,6 +104,7 @@ export class Tables implements OnInit {
       this.searchbyname(tablenumbertrim);
     } else {
       this.router.navigate(['gettable']);
+      this.currentpage = 1;
       this.getalltables();
     }
   }
@@ -100,10 +113,13 @@ export class Tables implements OnInit {
     this.http.deletetable(id).subscribe({
       next: (res) => {
         this.showMessage(res, 'success');
+
+        this.currentpage = 1;
         this.getalltables();
-      this.http.getalldeletedtables().subscribe(res=>{
-      this.tablestatus.setDeletedTables(res)
-    })
+
+        this.http.getalldeletedtables().subscribe(res => {
+          this.tablestatus.setDeletedTables(res)
+        });
       },
       error: (err) => {
         this.showMessage(err.error, 'error');
