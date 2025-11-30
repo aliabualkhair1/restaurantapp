@@ -18,7 +18,7 @@ export class Reservations {
   loading: boolean = false;
   reservations: UserReservations[] = [];
   date: any;
-deletedreservation:UserReservations[]=[]
+  deletedreservation:UserReservations[]=[]
   apiMessage: string = '';
   apiMessageType: 'success' | 'error' | '' = '';
 
@@ -40,19 +40,11 @@ deletedreservation:UserReservations[]=[]
       }
     });
 }
-  get now(): Date {
-    return new Date();
-  }
   getallreservations() {
     this.loading = true;
     this.http.getallreservations().subscribe({
       next: (res: any[]) => {
-        this.reservations = res.map(r => {
-          const date = r.dateOfReservation;
-          const time = r.endDate;
-          const endDateTime = new Date(`${date}T${time}`);
-          return { ...r, endDateTime };
-        });
+        this.reservations = res
         this.loading = false;
       },
       error: (err) => {
