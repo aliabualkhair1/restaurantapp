@@ -9,8 +9,8 @@ export interface UserReservations{
     tableLocation:string,
     numberOfGuests: number,
     dateOfReservation:Date,
-    startDate:any,
-    endDate:any
+    startTime:any,
+    endTime:any
     isPaid:boolean
     endDateTime?: Date;
 
@@ -19,15 +19,15 @@ export interface _AddReservation{
     tableId:number,
     numberOfGuests: number,
     dateOfReservation:Date,
-    startDate:any,
-    endDate:any
+    startTime:any,
+    endTime:any
     
 }
 export interface _UpdateReservation{
     numberOfGuests: number,
     dateOfReservation:Date,
-    startDate:any,
-    endDate:any
+    startTime:any,
+    endTime:any
     
 }
 
