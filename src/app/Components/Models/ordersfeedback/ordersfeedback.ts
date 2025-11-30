@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Spinner } from "../spinner/spinner";
 import { CommonModule } from '@angular/common';
-import { Reservation, UserReservations } from '../../../Interfaces/Models/reservation';
 import { Dashboardservice } from '../../../Services/dashboardservice';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { ReservationFeedback } from '../../../Interfaces/Models/reservationfeedback';
 import { OrdersFeedback } from '../../../Interfaces/Models/ordersfeedback';
 @Component({
   selector: 'app-ordersfeedback',
