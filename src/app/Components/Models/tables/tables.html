@@ -44,22 +44,10 @@
             <strong>المكان:</strong>
               {{ tables.location|translation }}
           </div>
-        <div class="details-section mb-3">
           <div class="d-flex justify-content-between align-items-center detail-item mb-2">
             <strong>السعة:</strong>
             <span>{{ tables.capacity }}</span>
           </div>
-<div class="d-flex justify-content-between align-items-center detail-item">
-  <strong>الحالة:</strong>
-  <span class="status-pill"
-        [ngClass]="{
-          'status-available': tables.status === 'Available',
-          'status-reserved': tables.status === 'Reserved',
-          'status-occupied': tables.status === 'Occupied'
-        }">
-    {{tables.status|translation}}
-  </span>
-</div>
         </div>
         <div class="card-footer bg-card-footer">
           <div class="d-flex flex-wrap gap-2 justify-content-end">
