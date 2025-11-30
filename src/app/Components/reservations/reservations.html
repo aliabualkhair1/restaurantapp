@@ -99,7 +99,7 @@
           <i class="bi bi-pencil-square"></i> تأكيد الحجز
         </button>
 
-        <button *ngIf="reservation.endDateTime && reservation.endDateTime < now"
+        <button *ngIf="reservation.isPaid == true"
                 (click)="addreservationfeedback(reservation.reservationId)"
                 class="btn btn-sm btn-outline-warning flex-fill">
           <i class="bi bi-pencil-square"></i> إضافة تقييم للحجز
