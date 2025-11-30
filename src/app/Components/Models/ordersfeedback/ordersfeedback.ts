@@ -22,7 +22,7 @@ this.getallordersfeedback()
   }
 getallordersfeedback(){
 this.loading=true
-  this.http.getallreservationsfeedback().subscribe({
+  this.http.getallordersfeedback().subscribe({
     next:(res)=>{
 this.ordersfeedback=[...new Map(res.map(u=>[u.userId,u])).values()];
 this.loading=false
