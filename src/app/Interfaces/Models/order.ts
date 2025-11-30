@@ -9,6 +9,7 @@ export interface Order {
   totalPrice:number
   isPaid:boolean
   orderItems:Orderitem[]
+  totalPaidOrders:number
 }
 export interface OrderItems{
    menuItemId: number,
