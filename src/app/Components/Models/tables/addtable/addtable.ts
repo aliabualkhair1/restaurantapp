@@ -22,7 +22,7 @@ export class Addtable {
   
   constructor(private http:Tablesservices,private router:Router,private routing:ActivatedRoute){
     this.formgroup=new FormGroup({
-      TableNumber:new FormControl("",[Validators.required,Validators.pattern('^[A-Za-z0-9]+$')]),
+      TableNumber:new FormControl("",[Validators.required,Validators.pattern('^[A-Za-z0-9]+$',Validators.maxlength(5)]),
       Capacity:new FormControl("",[Validators.required,Validators.pattern('^[0-9]+$')]),
       Location:new FormControl("",[Validators.required]),
       TableImage:new FormControl(null,[Validators.required])
