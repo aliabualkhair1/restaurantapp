@@ -40,16 +40,16 @@
         <div class="item-image mb-3">
           <img [src]="environment+'/Images/'+ tables.tableImage" alt="{{ tables.tableImage }}" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" />
         </div>
-<div class="d-flex align-items-center mb-2">
+<div class="d-flex justify-content-between align-items-center mb-2">
   <strong>المكان:</strong>
-  <span class="badge text-bg-success px-3 py-2 border border-success border-2 rounded-pill ms-auto">
+  <span class="badge text-bg-success px-3 py-2 border border-success border-2 rounded-pill">
     {{ tables.location | translation }}
   </span>
 </div>
 
-<div class="d-flex align-items-center mt-2">
+<div class="d-flex justify-content-between align-items-center mt-2">
   <strong>السعة:</strong>
-  <span class="bg-info text-dark px-3 py-1 rounded-pill fw-bold ms-auto">
+  <span class="bg-info text-dark px-3 py-1 rounded-pill fw-bold">
     {{ tables.capacity }}
   </span>
 </div>
