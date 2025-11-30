@@ -10,6 +10,7 @@ export interface Order {
   isPaid:boolean
   orderItems:Orderitem[]
   totalPaidOrders:number
+  totalCancelledPrice:number
 }
 export interface OrderItems{
    menuItemId: number,
