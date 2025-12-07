@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 export class Users implements OnInit {
   users: User[] = [];
   loading: boolean = false;
-  roles: string[] = ['--Select--', 'Admin', 'Staff', 'Customer', 'AdminAssistant'];
+  roles: string[] = ['--Select--', 'Admin', 'Staff', 'Customer', 'AdminAssistants'];
   username: any;
   role!: Role;
   isauth: boolean = false;
